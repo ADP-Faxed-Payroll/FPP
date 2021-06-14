@@ -1,38 +1,60 @@
-"""This is the main app that serves as a server for all the clients"""
 import os
-from flask import Flask, send_from_directory, json
-from flask_socketio import SocketIO
-from flask_cors import CORS
+import urllib.request
+from flask import Flask, request, redirect, render_template
+from werkzeug.utils import secure_filename
 
-APP = Flask(__name__, static_folder='../build/static')
+app = Flask(__name__)
+
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+print(APP_ROOT)
+
+UPLOAD_FOLD = 'uploads/' # upload folder path
+UPLOAD_FOLDER = os.path.join(APP_ROOT, UPLOAD_FOLD)
+print(UPLOAD_FOLDER)
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER # defines path for upload folder
+
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 # as large as 16MB
 
 
-CORS = CORS(APP, resources={r"/*": {"origins": "*"}})
+ALLOWED_EXTENSIONS = set(['pdf', 'png', 'jpg', 'jpeg'])
 
-SOCKETIO = SocketIO(APP,
-                    cors_allowed_origins="*",
-                    json=json,
-                    manage_session=False)
 
-@APP.route('/', defaults={"filename": "index.html"})
-@APP.route('/<path:filename>')
-def index(filename):
-    '''Tells python where our index file is that renders our React Components'''
-    return send_from_directory('../build', filename)
+def allowed_file(filename):
+	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+	
+@app.route('/')
+def upload_form():
+	return render_template('upload.html')
 
-@SOCKETIO.on('connect')
-def on_connect():
-    '''When someone connects to the server'''
-    print('User connected!')
-
-@SOCKETIO.on('disconnect')
-def on_disconnect():
-    '''When someone connects to the server'''
-    print('User disconnected!')
+@app.route('/upload', methods=['POST'])
+def upload_file():
+	
+	if request.method == 'POST':
+        # check if the post request has the file part
+		if 'file' not in request.files:
+			print('No file part')
+			return redirect(request.url)
+			
+		file = request.files['file']
+		
+		if file.filename == '':
+			print('No file selected for uploading')
+			return redirect(request.url)
+			
+		if file and allowed_file(file.filename):
+			filename = secure_filename(file.filename)
+			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+			
+			print('File successfully uploaded')
+			
+			return redirect('/')
+		else:
+			print('Allowed file types are pdf, png, jpg, jpeg')
+			return redirect(request.url)
 
 if __name__ == "__main__":
-    SOCKETIO.run(
-        APP,
-        host=os.getenv('IP', '0.0.0.0'),
+    app.run(
+    	host=os.getenv('IP', '0.0.0.0'),
         port=8081 if os.getenv('C9_PORT') else int(os.getenv('PORT', 8081))
-    )
+        )
