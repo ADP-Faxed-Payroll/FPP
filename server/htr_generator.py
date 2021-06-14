@@ -24,7 +24,7 @@ def generate_htr_file(file_path):
     # print(docText) # full generated text
     return (response)
 
-"""def get_confidence_levels(response):
+def get_confidence_levels(response):
     pages = response.full_text_annotation.pages
     for page in pages:
         for block in page.blocks:
@@ -39,4 +39,4 @@ def generate_htr_file(file_path):
                     print('Word text: {0} (confidence: {1}'.format(word_text, word.confidence))
     
                     for symbol in word.symbols:
-                        print('\tSymbol: {0} (confidence: {1}'.format(symbol.text, symbol.confidence))"""
+                        print('\tSymbol: {0} (confidence: {1}'.format(symbol.text, symbol.confidence))

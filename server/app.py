@@ -2,7 +2,7 @@ import os
 import urllib.request
 from flask import Flask, request, redirect, render_template
 from werkzeug.utils import secure_filename
-from htr_generator import generate_htr_file
+from htr_generator import generate_htr_file, get_confidence_levels
 
 app = Flask(__name__)
 
@@ -23,36 +23,33 @@ ALLOWED_EXTENSIONS = set(['pdf', 'png', 'jpg', 'jpeg'])
 
 def allowed_file(filename):
 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-	
+
 @app.route('/')
 def upload_form():
 	return render_template('upload.html')
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
-	
+
 	if request.method == 'POST':
         # check if the post request has the file part
 		if 'file' not in request.files:
 			print('No file part')
 			return redirect(request.url)
-		
+
 		file = request.files['file']
-		
-		print("FILE", file)	
-		
-		
+
 		if file.filename == '':
 			print('No file selected for uploading')
 			return redirect(request.url)
-			
+
 		if file and allowed_file(file.filename):
 			filename = secure_filename(file.filename)
 			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-			
+
 			print(generate_htr_file(os.path.join(app.config['UPLOAD_FOLDER'], filename)).full_text_annotation.text)
 			print('File successfully uploaded')
-			
+
 			return redirect('/')
 		else:
 			print('Allowed file types are pdf, png, jpg, jpeg')
