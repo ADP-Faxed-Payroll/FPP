@@ -61,8 +61,14 @@ def upload_file():
 			print('Symbol List:', symbol_list)
 			print(get_confidence_levels(doc))
 			print('File successfully uploaded')
-
-			return redirect('/')
+			
+			data = {
+				'WordList': word_list,
+				'SymbolList': symbol_list,
+				'Confidence': get_confidence_levels(doc),
+			}
+			
+			return data
 		else:
 			print('Allowed file types are pdf, png, jpg, jpeg')
 			return redirect(request.url)
