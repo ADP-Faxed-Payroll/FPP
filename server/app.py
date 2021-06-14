@@ -2,6 +2,7 @@ import os
 import urllib.request
 from flask import Flask, request, redirect, render_template
 from werkzeug.utils import secure_filename
+from htr_generator import generate_htr_file
 
 app = Flask(__name__)
 
@@ -35,8 +36,11 @@ def upload_file():
 		if 'file' not in request.files:
 			print('No file part')
 			return redirect(request.url)
-			
+		
 		file = request.files['file']
+		
+		print("FILE", file)	
+		
 		
 		if file.filename == '':
 			print('No file selected for uploading')
@@ -46,6 +50,7 @@ def upload_file():
 			filename = secure_filename(file.filename)
 			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 			
+			print(generate_htr_file(os.path.join(app.config['UPLOAD_FOLDER'], filename)).full_text_annotation.text)
 			print('File successfully uploaded')
 			
 			return redirect('/')

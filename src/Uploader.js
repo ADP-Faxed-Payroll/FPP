@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, {useState, useEffect} from 'react';
+import React, { useState } from 'react';
 
 export default function FileUploader() {
    const [file, setFile] = useState();
@@ -22,9 +22,9 @@ export default function FileUploader() {
         // Request made to the backend api
         // Send formData object
         axios.post("/upload", formData)
-        .then(res => {
-            console.log(res);
-            console.log(res.data)
+        .then(response => {
+            console.log(response);
+            console.log(response.data)
         })
         .catch(error => console.log(error));
         // setFileSubmitted(true);
