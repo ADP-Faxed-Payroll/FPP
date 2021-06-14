@@ -47,7 +47,19 @@ def upload_file():
 			filename = secure_filename(file.filename)
 			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-			print(generate_htr_file(os.path.join(app.config['UPLOAD_FOLDER'], filename)).full_text_annotation.text)
+			doc = generate_htr_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+			doc_text = doc.full_text_annotation.text
+			print(doc_text)
+			
+			word_list = doc_text.split()
+			
+			symbol_list = []
+			for word in word_list:
+				symbol_list.append(list(word))
+				
+			print('Word List:', word_list)
+			print('Symbol List:', symbol_list)
+			print(get_confidence_levels(doc))
 			print('File successfully uploaded')
 
 			return redirect('/')
