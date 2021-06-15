@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import './app.css';
 
 export default function FileUploader() {
    const [file, setFile] = useState();
@@ -56,6 +57,9 @@ export default function FileUploader() {
                 <button onClick={onFileUpload}>
                     Upload!
                 </button>
+                <div>
+                    <img className="FileImage" src={file? URL.createObjectURL(file) : null} alt={file? file.name : null} />
+                </div>
                 <div>
                 List of words along with Confidence levels
                 {htrData.WordList.map((word, index) => ( // Maybe pass word and word Confidence to a Word Component
