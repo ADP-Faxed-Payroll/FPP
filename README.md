@@ -4,7 +4,7 @@
 - AJ Ong
 - Giovanni Derosa
 - Kyle Partyka
-- Alan Payne (Sponsor)
+- Alan Payne (ADP SBS Sponsor)
 
 ## Overview
 The Faxed Payroll Project (FPP) aims to deliver an automated payroll system accessible from the browser. The automated payroll system will allow users to upload a scanned payroll form, and feature an automated  analysis of the computer and handwritten text and will convert it to machine readable text. 
