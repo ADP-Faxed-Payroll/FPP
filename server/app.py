@@ -1,6 +1,6 @@
 import os
 import urllib.request
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, redirect, render_template, jsonify
 from werkzeug.utils import secure_filename
 from htr_generator import generate_htr_file, get_confidence_levels
 
@@ -44,25 +44,39 @@ def upload_file():
 			return redirect(request.url)
 
 		if file and allowed_file(file.filename):
-			filename = secure_filename(file.filename)
-			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-
+			# creates a secure version of the filename ie. Payroll 6-14.jpg => Payroll_6-14.jpg
+			filename = secure_filename(file.filename) 
+			
+			# saves file in ./server/uploads
+			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename)) 
+			
 			doc = generate_htr_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-			doc_text = doc.full_text_annotation.text
+			doc_text = doc.full_text_annotation.text # HRT Api call
 			print(doc_text)
 			
 			word_list = doc_text.split()
 			
 			symbol_list = []
 			for word in word_list:
-				symbol_list.append(list(word))
+				for letter in word:
+					symbol_list.append(letter)
 				
 			print('Word List:', word_list)
 			print('Symbol List:', symbol_list)
 			print(get_confidence_levels(doc))
+			word_confidence, symbol_confidence = get_confidence_levels(doc);
+			
 			print('File successfully uploaded')
 
-			return redirect('/')
+			data = {
+				'WordList': word_list,
+				'SymbolList': symbol_list,
+				'WordConfidence': word_confidence,
+				'SymbolConfidence': symbol_confidence,
+			}
+
+			return jsonify(data)
+			
 		else:
 			print('Allowed file types are pdf, png, jpg, jpeg')
 			return redirect(request.url)
