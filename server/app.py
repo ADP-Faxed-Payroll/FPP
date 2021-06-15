@@ -44,11 +44,14 @@ def upload_file():
 			return redirect(request.url)
 
 		if file and allowed_file(file.filename):
-			filename = secure_filename(file.filename)
-			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-
+			# creates a secure version of the filename ie. Payroll 6-14.jpg => Payroll_6-14.jpg
+			filename = secure_filename(file.filename) 
+			
+			# saves file in ./server/uploads
+			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename)) 
+			
 			doc = generate_htr_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-			doc_text = doc.full_text_annotation.text
+			doc_text = doc.full_text_annotation.text # HRT Api call
 			print(doc_text)
 			
 			word_list = doc_text.split()

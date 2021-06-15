@@ -7,7 +7,7 @@ export default function FileUploader() {
    const [htrData, setHTRData] = useState({	WordList: [],
                             				SymbolList: [],
                             				WordConfidence: [],
-                            				SymbolConfidence: [] });
+                            				SymbolConfidence: [] }); // JSON state object
     const[htrDataRecieved, setHTRDataRecieved] = useState(false);
    
     function onFileChange(e){
@@ -50,7 +50,7 @@ export default function FileUploader() {
             </div>
           );
     }else{
-        return (
+        return ( // I formatted this pretty horribly, I will fix soon - AJ 
             <div>
                 <input type="file" name="file" onChange={onFileChange} />
                 <button onClick={onFileUpload}>
