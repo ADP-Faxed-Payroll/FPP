@@ -1,6 +1,6 @@
 import os
 import urllib.request
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, redirect, render_template, jsonify
 from werkzeug.utils import secure_filename
 from htr_generator import generate_htr_file, get_confidence_levels
 
@@ -55,14 +55,25 @@ def upload_file():
 			
 			symbol_list = []
 			for word in word_list:
-				symbol_list.append(list(word))
+				for letter in word:
+					symbol_list.append(letter)
 				
 			print('Word List:', word_list)
 			print('Symbol List:', symbol_list)
 			print(get_confidence_levels(doc))
+			word_confidence, symbol_confidence = get_confidence_levels(doc);
+			
 			print('File successfully uploaded')
 
-			return redirect('/')
+			data = {
+				'WordList': word_list,
+				'SymbolList': symbol_list,
+				'WordConfidence': word_confidence,
+				'SymbolConfidence': symbol_confidence,
+			}
+
+			return jsonify(data)
+			
 		else:
 			print('Allowed file types are pdf, png, jpg, jpeg')
 			return redirect(request.url)
