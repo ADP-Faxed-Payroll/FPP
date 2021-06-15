@@ -58,11 +58,11 @@ export default function FileUploader() {
                 </button>
                 <div>
                 List of words along with Confidence levels
-                {htrData.WordList.map((word, index) => (
+                {htrData.WordList.map((word, index) => ( // Maybe pass word and word Confidence to a Word Component
                     <body>{word + ': ' +  100*Math.floor(htrData.WordConfidence[index] * 100) / 100 + '%'}</body>
                     ))};
                 <p> ---------------------------------------------</p>
-                {htrData.SymbolList.map((letter, index) => (
+                {htrData.SymbolList.map((letter, index) => ( // Maybe pass symbol and symbol Confidence to a Symbol Component
                    <body>{letter + ': ' +  100*Math.floor(htrData.SymbolConfidence[index] * 100) / 100 + '%'}</body>
                    ))};
                 </div>
