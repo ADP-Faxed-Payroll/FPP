@@ -28,10 +28,10 @@ def get_confidence_levels(response):
     pages = response.full_text_annotation.pages
     for page in pages:
         for block in page.blocks:
-            # print('block confidence:', block.confidence)
+            print('block confidence:', block.confidence)
     
             for paragraph in block.paragraphs:
-                # print('paragraph confidence:', paragraph.confidence)
+                print('paragraph confidence:', paragraph.confidence)
     
                 for word in paragraph.words:
                     word_text = ''.join([symbol.text for symbol in word.symbols])

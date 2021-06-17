@@ -3,3 +3,8 @@
     height: auto;
     float:left;
 }
+
+.DocText {
+    max-width: 50%; 
+    float:right;
+}
