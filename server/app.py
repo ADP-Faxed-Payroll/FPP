@@ -61,7 +61,6 @@ def upload_file():
 				for letter in word:
 					symbol_list.append(letter)
 
-			print(get_confidence_levels(doc))
 			word_confidence, symbol_confidence = get_confidence_levels(doc);
 			
 			print('File successfully uploaded')
