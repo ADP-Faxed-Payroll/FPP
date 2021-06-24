@@ -4,6 +4,26 @@
     float:left;
 }
 
+.ImageForm {
+
+    /*float:left;*/
+
+}
+
+table{
+    width:50%;
+    margin-bottom:1em;
+    border-collapse: collapse;
+}
+th{
+    font-weight:bold;
+    background-color:#ddd;
+}
+th,
+td{
+    padding:0.5em;
+    border:1px solid #ccc;
+}
 .DocText {
     max-width: 50%; 
     float:right;
