@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import './app.css';
 import { Form, Button } from "react-bootstrap";
-
+import DocText from './DocText';
 
 export default function FileUploader() {
    const [file, setFile] = useState();
@@ -10,7 +10,8 @@ export default function FileUploader() {
    const [htrData, setHTRData] = useState({	WordList: [],
                             				SymbolList: [],
                             				WordConfidence: [],
-                            				SymbolConfidence: [] }); // JSON state object
+                            				SymbolConfidence: [],
+                            				DocText: ''}); // JSON state object
     const[htrDataRecieved, setHTRDataRecieved] = useState(false);
     const [RotateDoc, setRotateDoc] = useState(0);
    
@@ -64,7 +65,6 @@ export default function FileUploader() {
         }else{
             alert("Select file to upload!")
         }
-        
     }
     if(!htrDataRecieved){
         return (
@@ -76,7 +76,7 @@ export default function FileUploader() {
             </div>
           );
     }else{
-        return ( // I formatted this pretty horribly, I will fix soon - AJ 
+        return (
             <div>
                 <input type="file" name="file" onChange={onFileChange} />
                 <button onClick={onFileUpload}>
@@ -89,7 +89,6 @@ export default function FileUploader() {
                 
                 <div>
 
-                
                 <table>
     
                     <thead>
@@ -188,6 +187,15 @@ export default function FileUploader() {
     </div>
                 
                 <div>
+                    <img className="FileImage" src={file? URL.createObjectURL(file) : null} alt={file? file.name : null} />
+                </div> 
+                <DocText htrData={htrData} />
+
+            </div>
+          );
+    }
+}
+/*                <div>
                 List of words along with Confidence levels
                 {htrData.WordList.map((word, index) => ( // Maybe pass word and word Confidence to a Word Component
                     <body>{word + ': ' +  100*Math.floor(htrData.WordConfidence[index] * 100) / 100 + '%'}</body>
@@ -197,7 +205,4 @@ export default function FileUploader() {
                    <body>{letter + ': ' +  100*Math.floor(htrData.SymbolConfidence[index] * 100) / 100 + '%'}</body>
                    ))};
                 </div>
-            </div>
-          );
-    }
-}
+                */
