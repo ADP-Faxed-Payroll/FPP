@@ -60,10 +60,7 @@ def upload_file():
 			for word in word_list:
 				for letter in word:
 					symbol_list.append(letter)
-				
-			print('Word List:', word_list)
-			print('Symbol List:', symbol_list)
-			print(get_confidence_levels(doc))
+
 			word_confidence, symbol_confidence = get_confidence_levels(doc);
 			
 			print('File successfully uploaded')
@@ -73,6 +70,7 @@ def upload_file():
 				'SymbolList': symbol_list,
 				'WordConfidence': word_confidence,
 				'SymbolConfidence': symbol_confidence,
+				'DocText': doc_text,
 			}
 
 			return jsonify(data)

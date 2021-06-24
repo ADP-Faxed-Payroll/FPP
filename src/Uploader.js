@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import './app.css';
+import DocText from './DocText';
 
 export default function FileUploader() {
    const [file, setFile] = useState();
@@ -8,7 +9,8 @@ export default function FileUploader() {
    const [htrData, setHTRData] = useState({	WordList: [],
                             				SymbolList: [],
                             				WordConfidence: [],
-                            				SymbolConfidence: [] }); // JSON state object
+                            				SymbolConfidence: [],
+                            				DocText: ''}); // JSON state object
     const[htrDataRecieved, setHTRDataRecieved] = useState(false);
    
     function onFileChange(e){
@@ -29,14 +31,13 @@ export default function FileUploader() {
         axios.post("/upload", formData)
         .then(response => { // Response from backend
             console.log(response.data);
-            console.log("WordList: " + response.data.WordList);
-            console.log("SymbolList: " + response.data.SymbolList);
-            console.log("WordConfidence: " + response.data.WordConfidence);
-            console.log("SymbolConfidence: " + response.data.SymbolConfidence);
+            console.log("WordList: " + response.data.DocText);
             setHTRData({WordList: response.data.WordList,
                         SymbolList: response.data.SymbolList,
                         WordConfidence: response.data.WordConfidence,
-                        SymbolConfidence: response.data.SymbolConfidence});
+                        SymbolConfidence: response.data.SymbolConfidence,
+                        DocText: response.data.DocText
+            });
             setHTRDataRecieved(true);
         })
         .catch(err => console.log(err));
@@ -51,7 +52,7 @@ export default function FileUploader() {
             </div>
           );
     }else{
-        return ( // I formatted this pretty horribly, I will fix soon - AJ 
+        return (
             <div>
                 <input type="file" name="file" onChange={onFileChange} />
                 <button onClick={onFileUpload}>
@@ -59,8 +60,14 @@ export default function FileUploader() {
                 </button>
                 <div>
                     <img className="FileImage" src={file? URL.createObjectURL(file) : null} alt={file? file.name : null} />
-                </div>
-                <div>
+                </div> 
+                <DocText htrData={htrData} />
+
+            </div>
+          );
+    }
+}
+/*                <div>
                 List of words along with Confidence levels
                 {htrData.WordList.map((word, index) => ( // Maybe pass word and word Confidence to a Word Component
                     <body>{word + ': ' +  100*Math.floor(htrData.WordConfidence[index] * 100) / 100 + '%'}</body>
@@ -70,7 +77,4 @@ export default function FileUploader() {
                    <body>{letter + ': ' +  100*Math.floor(htrData.SymbolConfidence[index] * 100) / 100 + '%'}</body>
                    ))};
                 </div>
-            </div>
-          );
-    }
-}
+                */
