@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import './app.css';
-import { Form, Button } from "react-bootstrap";
 import DocText from './DocText';
 
 export default function FileUploader() {
@@ -73,6 +72,10 @@ export default function FileUploader() {
                 <button onClick={onFileUpload}>
                     Upload!
                 </button>
+                <div>
+                    <img className="FileImage"  id="doc" src={file? URL.createObjectURL(file) : null} alt={file? file.name : null} />
+                </div>
+                <button onClick={rotateImg}>Rotate Image</button>
             </div>
           );
     }else{
@@ -184,11 +187,7 @@ export default function FileUploader() {
                     </tbody>
                 </table>
                 
-    </div>
-                
-                <div>
-                    <img className="FileImage" src={file? URL.createObjectURL(file) : null} alt={file? file.name : null} />
-                </div> 
+                </div>
                 <DocText htrData={htrData} />
 
             </div>

@@ -13,10 +13,10 @@ export default function DocText(props) {
                         return(<li style={{ color: 'green' }}>{word}</li>);
                     }
                     else if(props.htrData.WordConfidence[index] >= 0.80 && props.htrData.WordConfidence[index] < .95){
-                        return(<li style={{ color: 'yellow' }}>{word}</li>);
+                        return(<b><li style={{ color: 'orange' }}>{word}</li></b>);
                     }
                     else if(props.htrData.WordConfidence[index] < 0.80){
-                        return(<li style={{ color: 'red' }}>{word}</li>);
+                        return(<b><li style={{ color: 'red' }}>{word}</li></b>);
                     }
                     else{
                          console.log(word + " ?????????")

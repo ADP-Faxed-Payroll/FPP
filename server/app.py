@@ -2,7 +2,7 @@ import os
 import urllib.request
 from flask import Flask, request, redirect, render_template, jsonify
 from werkzeug.utils import secure_filename
-from htr_generator import generate_htr_file, get_confidence_levels
+from htr_generator import generate_htr_file, get_confidence_levels, get_vertices
 
 app = Flask(__name__)
 
@@ -52,7 +52,7 @@ def upload_file():
 			
 			doc = generate_htr_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 			doc_text = doc.full_text_annotation.text # HRT Api call
-			print(doc_text)
+			# print(doc_text)
 			
 			word_list = doc_text.split()
 			
@@ -62,6 +62,8 @@ def upload_file():
 					symbol_list.append(letter)
 
 			word_confidence, symbol_confidence = get_confidence_levels(doc);
+			
+			get_vertices(doc)
 			
 			print('File successfully uploaded')
 
