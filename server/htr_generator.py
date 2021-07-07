@@ -59,10 +59,10 @@ def get_vertices(response):
     ctr = 0
     
     print('Texts:')
-    TL= [383,3113]
-    BL= [530,3113]
+    TL= [383,3113] ####################Box coordinates
+    BL= [503,3113]
     TR= [383,2585]
-    BR= [530,2585]
+    BR= [503,2585]
     Y_shift=218
     X_shift=120
     w, h = 12, 12;
@@ -70,105 +70,74 @@ def get_vertices(response):
     
     
     
-    for text in texts:
-        #print('\n"{}"'.format(text.description))
-        vertices = []
-        for vertex in text.bounding_poly.vertices:
-            vertices.append('({},{})'.format(vertex.x, vertex.y))
-
-        #print('bounds: {}'.format(','.join(vertices)))
         
-        if text.description in ignored_words or vertex.x < 330:
-            continue
+        #for-loop that is going to go through each of the 144 boxes 1 by 1 and will store them in a matrix
         
-        for row in range(12):
-            TL[0]=TL[0]+row*X_shift
-            BL[0]=BL[0]+row*X_shift
-            TR[0]=TR[0]+row*X_shift
-            BR[0]=BR[0]+row*X_shift
-            for column in range(12):
-                if column==1:
-                    TL[1]-=540
-                    BL[1]-=540
-                    TR[1]-=322
-                    BR[1]-=322
-                elif column==0:
-                    TL[1]=3113
-                    BL[1]=3113
-                    TR[1]=2585
-                    BR[1]=2585
-                else:
-                    TL[1]=(TL[1]-540)-((column-1)*Y_shift)
-                    BL[1]=(BL[1]-540)-((column-1)*Y_shift)
-                    TR[1]=(TR[1]-322)-((column-1)*Y_shift)
-                    BR[1]=(BR[1]-322)-((column-1)*Y_shift)
-                
-                print("TR BR BL TL: ")
-                print(TR, BR, BL, TL)
-                if vertex.y > TR[1] and vertex.y <= TL[1] and vertex.x > TR[0] and vertex.x < BL[0] : # works
-                    if text.description == ',' or text.description == '.':
-                        TL[1]=3113
-                        BL[1]=3113
-                        TR[1]=2585
-                        BR[1]=2585
-                        continue
-                    employee_information.append(text.description)
-                    Matrix[row][column]=text.description
+    for row in range(12):
+        TL[0]=TL[0]+row*X_shift #resets the first index in the box coordinates that are initiated above
+        BL[0]=BL[0]+row*X_shift
+        TR[0]=TR[0]+row*X_shift
+        BR[0]=BR[0]+row*X_shift
+        for column in range(12):
+            if column==1: #the column is making a jump that is different than the others due to it going from first box to second
+                TL[1]-=540
+                BL[1]-=540
+                TR[1]-=218
+                BR[1]-=218
+            elif column==0: #if column is starting over, Y axis should be at the beginning again, thus subscript [1] gets changed
                 TL[1]=3113
                 BL[1]=3113
                 TR[1]=2585
                 BR[1]=2585
-            TL[0]=383
-            BL[0]=530
-            TR[0]=383
-            BR[0]=530
+            else:          #after the first shift, the columns are the same size
+                TL[1]=(TL[1]-540)-((column-1)*Y_shift) 
+                BL[1]=(BL[1]-540)-((column-1)*Y_shift)
+                TR[1]=(TR[1]-218)-((column-1)*Y_shift)
+                BR[1]=(BR[1]-218)-((column-1)*Y_shift)
+            if column==0:
+                print("TR BR BL TL: ")
+                print(TR, BR, BL, TL)
             
-        TL[0]=TL[0]+X_shift
-        BL[0]=BL[0]+X_shift
-        TR[0]=TR[0]+X_shift
-        BR[0]=BR[0]+X_shift
+            for text in texts:
+                min_x=3000
+                max_y=0
+                vertices = []
+                for vertex in text.bounding_poly.vertices:
+                    vertices.append('({},{})'.format(vertex.x, vertex.y))
+                    if vertex.x<min_x:
+                        min_x=vertex.x
+                    if vertex.y>max_y:
+                        max_y=vertex.y
+                        
         
-        if vertex.y > 2585 and vertex.y <= 3100 and vertex.x < 1839: # works
-            if text.description == ',' or text.description == '.':
-                continue
-            employee_information.append(text.description)
-
-        if vertex.y > 2355 and vertex.y <= 2585 and vertex.x < 1839: # works
-            regular_hours.append(text.description)
-
-        if vertex.y > 2100 and vertex.y <= 2355 and vertex.x < 1839: # works
-            salary_hours.append(text.description)
+                if text.description in ignored_words or vertex.x < 330:
+                    continue
             
-        if vertex.y > 2000 and vertex.y <= 2100 and vertex.x < 1839: # works
-            overtime_hours.append(text.description)
                 
-        if vertex.y > 2580 and vertex.y <= 2000 and vertex.x < 1839: 
-            vacation_hours.append(text.description)
+                if max_y > TR[1] and max_y <= TL[1] and min_x > TR[0] and min_x < BL[0] : # works
+                    if text.description == ',' or text.description == '.':
+                        continue
+                    employee_information.append(text.description)
+                    if Matrix[row][column]!=0:
+                        Matrix[row][column] = ''.join([Matrix[row][column], text.description])
+                    else:
+                        Matrix[row][column] = text.description   
                     
-        if vertex.y > 2580 and vertex.y <= 3090 and vertex.x < 1839:
-            sick_hours.append(text.description)
-                
-        if vertex.y > 2580 and vertex.y <= 3090 and vertex.x < 1839:
-            personal_hours.append(text.description)
-                
-        if vertex.y > 2580 and vertex.y <= 3090 and vertex.x < 1839:
-            holiday_hours.append(text.description)
-                
-        if vertex.y > 2580 and vertex.y <= 3090 and vertex.x < 1839:
-            bonus_amount.append(text.description)
-                
-        if vertex.y > 2580 and vertex.y <= 3090 and vertex.x < 1839:
-            misc_amount.append(text.description)
-                
-        if vertex.y > 2580 and vertex.y <= 3090 and vertex.x < 1839:
-            standby_hours.append(text.description)
-                    
-        if vertex.y > 2580 and vertex.y <= 3090 and vertex.x < 1839:
-            notes.append(text.description)
-
+            TL[1]=3113
+            BL[1]=3113
+            TR[1]=2585
+            BR[1]=2585
+        TL[0]=383
+        BL[0]=503
+        TR[0]=383
+        BR[0]=503
         
-    print('Employees:', employee_information)
-    print('Regular Hours:', regular_hours)
+    TL[0]=TL[0]+X_shift
+    BL[0]=BL[0]+X_shift
+    TR[0]=TR[0]+X_shift
+    BR[0]=BR[0]+X_shift
+        
+
     print(Matrix)
 
     
