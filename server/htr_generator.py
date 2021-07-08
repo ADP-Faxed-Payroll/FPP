@@ -99,22 +99,23 @@ def get_vertices(response):
                 print(TR, BR, BL, TL)
             
             for text in texts:
-                min_x=3000
-                max_y=0
+                avg_x=0
+                avg_y=0
                 vertices = []
                 for vertex in text.bounding_poly.vertices:
                     vertices.append('({},{})'.format(vertex.x, vertex.y))
-                    if vertex.x<min_x:
-                        min_x=vertex.x
-                    if vertex.y>max_y:
-                        max_y=vertex.y
-                        
+                    avg_x+=vertex.x
+                    avg_y+=vertex.y
+                
+                avg_x=avg_x/4
+                avg_y=avg_y/4
+             
         
                 if text.description in ignored_words or vertex.x < 330:
                     continue
             
                 
-                if max_y > TR[1] and max_y <= TL[1] and min_x > TR[0] and min_x < BL[0] : # works
+                if avg_y > TR[1] and avg_y <= TL[1] and avg_x > TR[0] and avg_x < BL[0] : # works
                     if text.description == ',' or text.description == '.':
                         continue
                     employee_information.append(text.description)
