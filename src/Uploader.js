@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import './app.css';
-import { Form, Button } from "react-bootstrap";
 import DocText from './DocText';
 import landingImage from './adp_logo1.png';
 
@@ -78,6 +77,10 @@ export default function FileUploader() {
                     <button onClick={onFileUpload}>
                         Upload!
                     </button>
+                    <div>
+                        <img className="FileImage"  id="doc" src={file? URL.createObjectURL(file) : null} alt={file? file.name : null} />
+                    </div>
+                    <button onClick={rotateImg}>Rotate Image</button>
                 </div>
                 <div>
                     <footer class="footer-text">
@@ -198,16 +201,110 @@ export default function FileUploader() {
                             <td contenteditable='true'>Lorem</td>
                         </tr>
                         <tr>
+                            <td contenteditable='true'>{htrData.WordList[1]}</td>
+                            <td contenteditable='true'>Dolor</td>
+                            <td contenteditable='true'>Ipsum</td>
+                            <td contenteditable='true'>Lorem</td>
+                            <td contenteditable='true'>{htrData.WordList[1]}</td>
+                            <td contenteditable='true'>Dolor</td>
+                            <td contenteditable='true'>Ipsum</td>
+                            <td contenteditable='true'>Lorem</td>
+                            <td contenteditable='true'>{htrData.WordList[90000]}</td>
+                            <td contenteditable='true'>Dolor</td>
+                            <td contenteditable='true'>Ipsum</td>
+                            <td contenteditable='true'>Lorem</td>
+                        </tr>
+                        <tr>
+                            <td contenteditable='true'>{htrData.WordList[1]}</td>
+                            <td contenteditable='true'>Dolor</td>
+                            <td contenteditable='true'>Ipsum</td>
+                            <td contenteditable='true'>Lorem</td>
+                            <td contenteditable='true'>{htrData.WordList[1]}</td>
+                            <td contenteditable='true'>Dolor</td>
+                            <td contenteditable='true'>Ipsum</td>
+                            <td contenteditable='true'>Lorem</td>
+                            <td contenteditable='true'>{htrData.WordList[90000]}</td>
+                            <td contenteditable='true'>Dolor</td>
+                            <td contenteditable='true'>Ipsum</td>
+                            <td contenteditable='true'>Lorem</td>
+                        </tr>
+                        <tr>
+                            <td contenteditable='true'>{htrData.WordList[1]}</td>
+                            <td contenteditable='true'>Dolor</td>
+                            <td contenteditable='true'>Ipsum</td>
+                            <td contenteditable='true'>Lorem</td>
+                            <td contenteditable='true'>{htrData.WordList[1]}</td>
+                            <td contenteditable='true'>Dolor</td>
+                            <td contenteditable='true'>Ipsum</td>
+                            <td contenteditable='true'>Lorem</td>
+                            <td contenteditable='true'>{htrData.WordList[90000]}</td>
+                            <td contenteditable='true'>Dolor</td>
+                            <td contenteditable='true'>Ipsum</td>
+                            <td contenteditable='true'>Lorem</td>
+                        </tr>
+                        <tr>
+                            <td contenteditable='true'>{htrData.WordList[1]}</td>
+                            <td contenteditable='true'>Dolor</td>
+                            <td contenteditable='true'>Ipsum</td>
+                            <td contenteditable='true'>Lorem</td>
+                            <td contenteditable='true'>{htrData.WordList[1]}</td>
+                            <td contenteditable='true'>Dolor</td>
+                            <td contenteditable='true'>Ipsum</td>
+                            <td contenteditable='true'>Lorem</td>
+                            <td contenteditable='true'>{htrData.WordList[90000]}</td>
+                            <td contenteditable='true'>Dolor</td>
+                            <td contenteditable='true'>Ipsum</td>
+                            <td contenteditable='true'>Lorem</td>
+                        </tr>
+                        <tr>
+                            <td contenteditable='true'>{htrData.WordList[1]}</td>
+                            <td contenteditable='true'>Dolor</td>
+                            <td contenteditable='true'>Ipsum</td>
+                            <td contenteditable='true'>Lorem</td>
+                            <td contenteditable='true'>{htrData.WordList[1]}</td>
+                            <td contenteditable='true'>Dolor</td>
+                            <td contenteditable='true'>Ipsum</td>
+                            <td contenteditable='true'>Lorem</td>
+                            <td contenteditable='true'>{htrData.WordList[90000]}</td>
+                            <td contenteditable='true'>Dolor</td>
+                            <td contenteditable='true'>Ipsum</td>
+                            <td contenteditable='true'>Lorem</td>
+                        </tr>
+                        <tr>
+                            <td contenteditable='true'>{htrData.WordList[1]}</td>
+                            <td contenteditable='true'>Dolor</td>
+                            <td contenteditable='true'>Ipsum</td>
+                            <td contenteditable='true'>Lorem</td>
+                            <td contenteditable='true'>{htrData.WordList[1]}</td>
+                            <td contenteditable='true'>Dolor</td>
+                            <td contenteditable='true'>Ipsum</td>
+                            <td contenteditable='true'>Lorem</td>
+                            <td contenteditable='true'>{htrData.WordList[90000]}</td>
+                            <td contenteditable='true'>Dolor</td>
+                            <td contenteditable='true'>Ipsum</td>
+                            <td contenteditable='true'>Lorem</td>
+                        </tr>
+                        <tr>
+                            <td contenteditable='true'>{htrData.WordList[1]}</td>
+                            <td contenteditable='true'>Dolor</td>
+                            <td contenteditable='true'>Ipsum</td>
+                            <td contenteditable='true'>Lorem</td>
+                            <td contenteditable='true'>{htrData.WordList[1]}</td>
+                            <td contenteditable='true'>Dolor</td>
+                            <td contenteditable='true'>Ipsum</td>
+                            <td contenteditable='true'>Lorem</td>
+                            <td contenteditable='true'>{htrData.WordList[90000]}</td>
+                            <td contenteditable='true'>Dolor</td>
+                            <td contenteditable='true'>Ipsum</td>
+                            <td contenteditable='true'>Lorem</td>
+                        </tr>
+                        <tr>
                             <td><form><input type = "submit"></input></form></td>
                         </tr>
                     </tbody>
                 </table>
                 
-    </div>
-                
-                <div>
-                    <img className="FileImage" src={file? URL.createObjectURL(file) : null} alt={file? file.name : null} />
-                </div> 
+                </div>
                 <DocText htrData={htrData} />
 
             </div>
