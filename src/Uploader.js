@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import './app.css';
 import { Form, Button } from "react-bootstrap";
 import DocText from './DocText';
+import landingImage from './adp_logo1.png';
 
 export default function FileUploader() {
    const [file, setFile] = useState();
@@ -68,12 +69,30 @@ export default function FileUploader() {
     }
     if(!htrDataRecieved){
         return (
-            <div>
-                <input type="file" name="file" onChange={onFileChange} />
-                <button onClick={onFileUpload}>
-                    Upload!
-                </button>
-            </div>
+            <body>
+                <div class="upload-body">
+                    <header>
+                        <img class="adp-img" src={landingImage} alt="ADP Logo" />
+                    </header>
+                    <input type="file" name="file" onChange={onFileChange} />
+                    <button onClick={onFileUpload}>
+                        Upload!
+                    </button>
+                </div>
+                <div>
+                    <footer class="footer-text">
+                        <p>Made By: Kyle Partyka</p>
+                        <a href="https://github.com/kwp5/">
+                            <img
+                                src="https://www.clipartmax.com/png/middle/48-483031_github-logo-black-and-white-github-icon-vector.png"
+                                width="75"
+                                height="75"
+                                alt="Github logo"
+                            ></img>
+                        </a>
+                    </footer>
+                </div>
+            </body>
           );
     }else{
         return (

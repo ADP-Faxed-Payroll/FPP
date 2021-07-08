@@ -2,7 +2,7 @@ import React from 'react';
 import './Landing.css';
 import ReactDOM from 'react-dom';
 import App from './App';
-import landingImage from './landing1.svg';
+import landingImage from './adp_logo1.png';
 
 export default function Landing() {
     function Login() {
@@ -32,12 +32,24 @@ export default function Landing() {
                 </p>
               </div>
               <div>
-                <label>Username : </label>
-                <input type="text" placeholder="Enter Username" name="username" />
-                <br />
-                <label>Password : </label>
-                <input type="password" placeholder="Enter Password" name="password" />
-                <br />
+                <table class="form-table">
+                  <tr>
+                    <td>
+                      Username :
+                    </td>
+                    <td>
+                      <input type="text" placeholder="Enter Username" name="username" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Password :
+                    </td>
+                    <td>
+                      <input type="password" placeholder="Enter Password" name="password" />
+                    </td>
+                  </tr>
+                </table>
                 <button type="submit" onClick={Login}>Login</button>
               </div>
             </div>
