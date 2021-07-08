@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import './app.css';
 import DocText from './DocText';
 
+import Landing from './Landing';
+
 export default function FileUploader() {
    const [file, setFile] = useState();
    //  [fileSubmitted, setFileSubmitted] = useState(false);
@@ -13,7 +15,12 @@ export default function FileUploader() {
                             				DocText: ''}); // JSON state object
     const[htrDataRecieved, setHTRDataRecieved] = useState(false);
     const [RotateDoc, setRotateDoc] = useState(0);
-   
+    
+    const [landingPage, setLandingPage] = useState(false);
+    
+    function openLandingPage(){
+        setLandingPage(true)
+    }
    
     let rotation = 0;
     function rotateImg() {
@@ -65,9 +72,17 @@ export default function FileUploader() {
             alert("Select file to upload!")
         }
     }
+    
+    if(landingPage){
+        return(
+            <Landing/>
+            );
+    }
+    
     if(!htrDataRecieved){
         return (
             <div>
+                <button onClick={openLandingPage}>Landing Page</button>
                 <input type="file" name="file" onChange={onFileChange} />
                 <button onClick={onFileUpload}>
                     Upload!

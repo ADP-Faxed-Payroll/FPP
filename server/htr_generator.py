@@ -119,8 +119,8 @@ def get_vertices(response):
                     if text.description == ',' or text.description == '.':
                         continue
                     employee_information.append(text.description)
-                    if Matrix[row][column]!=0:
-                        Matrix[row][column] = ''.join([Matrix[row][column], text.description])
+                    if Matrix[row][column] != 0:
+                        Matrix[row][column] = ' '.join([Matrix[row][column], text.description])
                     else:
                         Matrix[row][column] = text.description   
                     
