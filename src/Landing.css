@@ -1,0 +1,81 @@
+body {
+  background-color: #ebebeb;
+  margin: 0;
+}
+
+.login {
+  color: black;
+}
+
+.title {
+  font-size: 65px;
+}
+
+.text {
+  font-size: 20px;
+}
+
+.head {
+  background: url(https://i.stack.imgur.com/zRInk.png) center center no-repeat;
+  background-size: 100% 100%;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 800px;
+  margin-left: -180px;
+}
+
+.main-part {
+  margin-top: 20px;
+  max-width: 100%;
+}
+
+.landing-img {
+    max-width: 75%;
+    height: auto;
+}
+
+.container {
+  max-width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer-text {
+  text-align: center;
+  color: black;
+  font-size: 20px;
+}
+
+.grid-container {
+  background-color: #ebebeb;
+  color: black;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 2fr));
+  padding: 70px;
+}
+
+.grid-item {
+  padding: 25px;
+  font-size: 30px;
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 960px;
+  }
+  .main {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+  .main {
+    max-width: 960px;
+  }
+}
