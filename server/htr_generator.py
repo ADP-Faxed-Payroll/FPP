@@ -45,8 +45,8 @@ def get_vertices(response):
     
     employee_information = []
     regular_hours = []
-    salary_hours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    overtime_hours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    salary_hours = []
+    overtime_hours = []
     vacation_hours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     sick_hours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     personal_hours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -58,23 +58,47 @@ def get_vertices(response):
     ignored_words = ['Employee', 'Information', 'Regular', 'Hours', 'Salary', 'Amount', 'Overtime', 'Vacation', 'Sick', 'Personal', 'Holiday', 'Bonus', 'Misc', 'Standby', 'Notes']
     ctr = 0
     
+    words = []
+    words_min_x_cords = [] 
+    words_max_x_cords = [] 
+    words_min_y_cords = [] 
+    words_max_y_cords = [] 
+    
+    
     print('Texts:')
 
+    # find minimum y value of each of the points and then order them row by row
+    
+    min_x_cord_row = 380
+    max_x_cord_row = 500
+    
     for text in texts:
         print('\n"{}"'.format(text.description))
         vertices = []
+        min_x_cord_word = 4000
+        max_y_cord_word = 0
         for vertex in text.bounding_poly.vertices:
+            if vertex.x < min_x_cord_word:
+                min_x_cord_word = vertex.x
+            if vertex.y > max_y_cord_word:
+                max_y_cord_word = vertex.y
             vertices.append('({},{})'.format(vertex.x, vertex.y))
-
+        print(text.description, "min x coords: " + str(min_x_cord_word),'max y coords: ' +  str(max_y_cord_word))
+        words.append(text.description)
+        words_min_x_cords.append(text.description)
+        words_max_y_cords.append(text.description)
+        
         print('bounds: {}'.format(','.join(vertices)))
         
-        if text.description in ignored_words:
+        if text.description in ignored_words or vertex.x < 330:
             continue
         
-        if vertex.y > 2585 and vertex.y <= 3100 and vertex.x < 1839: # works
+        if vertex.y > 2585 and vertex.y <= 3100 and min_x_cord_word > min_x_cord_row and min_x_cord_word < max_x_cord_row : # works
             if text.description == ',' or text.description == '.':
                 continue
             employee_information.append(text.description)
+            min_x_cord_row += 120 # not where it goes
+            max_x_cord_row += 120 # not where it goes
 
         if vertex.y > 2355 and vertex.y <= 2585 and vertex.x < 1839: # works
             regular_hours.append(text.description)
@@ -110,9 +134,10 @@ def get_vertices(response):
             notes.append(text.description)
 
         
-    print('Employees:', employee_information)
-    print('Regular Hours:', regular_hours)
-
+    # print('Employees:', employee_information)
+    # print('Regular Hours:', regular_hours)
+    # print('Salary Hours:', salary_hours)
+    # print('Overtime Hours:', overtime_hours)
     
 """
 lines = response.text_annotations[0].description

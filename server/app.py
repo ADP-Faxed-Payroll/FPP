@@ -52,7 +52,7 @@ def upload_file():
 			
 			doc = generate_htr_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 			doc_text = doc.full_text_annotation.text # HRT Api call
-			# print(doc_text)
+			# 6print(doc_text)
 			
 			word_list = doc_text.split()
 			
