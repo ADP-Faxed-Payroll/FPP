@@ -1,5 +1,10 @@
+html, body {
+    height: 100%;
+}
+
 body {
-  background-color: #ebebeb;
+    display: flex;
+    background-color: #ebebeb;
 }
 
 .form-table {
@@ -19,8 +24,8 @@ body {
 }
 
 .head {
-  background: url(https://i.stack.imgur.com/zRInk.png) center center no-repeat;
-  background-size: 100% 100%;
+  background: url(https://i.stack.imgur.com/zRInk.png) no-repeat;
+  background-size: 100% auto;
 }
 
 .main {
@@ -30,7 +35,6 @@ body {
 }
 
 .main-part {
-  margin-top: 20px;
   max-width: 100%;
 }
 

@@ -15,8 +15,8 @@ export default function Landing() {
     }
 
   return (
-    <div>
-      <header class="head">
+    <div class="head">
+      <header>
         <div class="container">
           <div class="main">
             <div class="main-part">
@@ -88,7 +88,7 @@ export default function Landing() {
         </div>
       </div>
       <footer class="footer-text">
-        <p>Made By: Kyle Partyka</p>
+        <p>Made By: Kyle Partyka, AJ Ong, Giovanni DeRosa</p>
         <a href="https://github.com/kwp5/">
           <img
             src="https://www.clipartmax.com/png/middle/48-483031_github-logo-black-and-white-github-icon-vector.png"
