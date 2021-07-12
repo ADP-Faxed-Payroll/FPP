@@ -3,6 +3,8 @@ import React from 'react';
 import './app.css';
 
 export default function DocText(props) {
+    console.log('HTR DATA')
+    console.log(props.htrData)
     
     return (
         <div>
