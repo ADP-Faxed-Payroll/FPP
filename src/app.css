@@ -1,13 +1,12 @@
 .FileImage {
-    max-width: 35%;  
-    height: auto;
-    float:left;
+    width: 37vw;
+    height: 40vh;
+    border: 15px solid black;
 }
 
-.ImageForm {
-
-    /*float:left;*/
-
+.prev-img {
+    margin-top: 100px;
+    margin-left: 50px;
 }
 
 table{
@@ -27,4 +26,179 @@ td{
 .DocText {
     max-width: 50%; 
     float:right;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+}
+
+.upload-body {
+    background: url(https://i.stack.imgur.com/zRInk.png) no-repeat;
+    background-size: 100% auto;
+}
+
+.u-grid {
+    display: grid;
+    grid-template-columns: fit-content(40vw) 350px;
+    column-gap: 30px;
+    margin-left: 50px;
+}
+
+.adp-img {
+    width: 10%;
+}
+
+.location {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.olocation {
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.uploader {
+    margin-top: 290px;
+    height: 165px;
+}
+
+.loader {
+  border: 8px solid black;
+  border-radius: 50%;
+  border-top: 8px solid #3498db;
+  width: 30px;
+  height: 30px;
+  animation: spin 2s linear infinite;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.tgrid {
+    display: grid;
+    grid-template-columns: auto auto;
+    margin-top: 150px;
+    justify-items: center;
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: 1fr repeat(10, 80px) 100px;
+    border-top: 3px solid black;
+    border-right: 3px solid black;
+}
+
+span {
+    border-bottom: 3px solid black;
+    border-left: 3px solid black;
+    text-align: center;
+    background-color: white;
+}
+
+.h {
+    background-color: lightgrey;
+}
+
+.n-uploader {
+    border: 2px dashed black;
+    border-radius: 10px;
+    background: radial-gradient(ellipse at center,#EB6A5A 0,#c9402f 100%);
+}
+
+.text-c {
+    text-align: center;
+}
+
+label {
+    background: #ebebeb;
+    color:#EB6A5A;
+    font-size: 1.2em;
+    line-height: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    box-shadow: 0 1px 3px gray;
+    cursor: pointer;
+    display: block;
+    height: 26%;
+    width: 45%;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+form > label {
+    background: #ebebeb;
+    color:#EB6A5A;
+    font-size: 1em;
+    line-height: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    box-shadow: 0 1px 3px gray;
+    cursor: pointer;
+    display: block;
+    width: 110%;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.file-input {
+    width: 0.1px;
+    height: 0.1px;
+}
+
+.up-button {
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    background: #ebebeb;
+    color:#EB6A5A;
+    font-size: 1em;
+    line-height: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    height: 20%;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mtb {
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.sizing {
+    width: 35%;
+    height: 100%;
+}
+
+.o {
+    opacity: 0;
+}
+
+.rotate-button {
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    background: #ebebeb;
+    color:#EB6A5A;
+    font-size: 1em;
+    line-height: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    height: 5%;
+    width: 20%;
 }

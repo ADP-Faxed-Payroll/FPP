@@ -2,7 +2,7 @@ import React from 'react';
 import './Landing.css';
 import ReactDOM from 'react-dom';
 import App from './App';
-import landingImage from './landing1.svg';
+import landingImage from './adp_logo1.png';
 
 export default function Landing() {
     function Login() {
@@ -15,8 +15,8 @@ export default function Landing() {
     }
 
   return (
-    <div>
-      <header class="head">
+    <div class="head">
+      <header>
         <div class="container">
           <div class="main">
             <div class="main-part">
@@ -32,12 +32,24 @@ export default function Landing() {
                 </p>
               </div>
               <div>
-                <label>Username : </label>
-                <input type="text" placeholder="Enter Username" name="username" />
-                <br />
-                <label>Password : </label>
-                <input type="password" placeholder="Enter Password" name="password" />
-                <br />
+                <table class="form-table">
+                  <tr>
+                    <td>
+                      Username :
+                    </td>
+                    <td>
+                      <input type="text" placeholder="Enter Username" name="username" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Password :
+                    </td>
+                    <td>
+                      <input type="password" placeholder="Enter Password" name="password" />
+                    </td>
+                  </tr>
+                </table>
                 <button type="submit" onClick={Login}>Login</button>
               </div>
             </div>
@@ -76,7 +88,7 @@ export default function Landing() {
         </div>
       </div>
       <footer class="footer-text">
-        <p>Made By: Kyle Partyka</p>
+        <p>Made By: Kyle Partyka, AJ Ong, Giovanni DeRosa</p>
         <a href="https://github.com/kwp5/">
           <img
             src="https://www.clipartmax.com/png/middle/48-483031_github-logo-black-and-white-github-icon-vector.png"
