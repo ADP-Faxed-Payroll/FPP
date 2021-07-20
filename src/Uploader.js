@@ -1,7 +1,6 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './app.css';
-import DocText from './DocText';
 import landingImage from './adp_logo1.png';
 
 export default function FileUploader() {
@@ -14,6 +13,9 @@ export default function FileUploader() {
                             				DocText: ''}); // JSON state object
     const[htrDataRecieved, setHTRDataRecieved] = useState(false);
     const [RotateDoc, setRotateDoc] = useState(0);
+    const [wrongChar, setWrongChar] = useState('');
+    const [rightNum, setRightNum] = useState('');
+    const [message, setMessage] = useState('');
 
     function rotateImg() {
         if (document.getElementById("doc")){
@@ -32,7 +34,7 @@ export default function FileUploader() {
                 document.getElementById("upload-contain").style.marginTop = "0";
                 document.getElementById("upload-contain").style.height = "100%";
             }
-            console.log(RotateDoc)  
+            console.log(RotateDoc);
             document.querySelector("#doc").style.transform = `rotate(${RotateDoc}deg)`;
         }  
     }
@@ -41,13 +43,14 @@ export default function FileUploader() {
         console.log(e.target.files[0]);
         setFile(e.target.files[0]);
     }
+    
     function onFileUpload(){
         if (file!=null){
             var contain = document.getElementById("upload-contain");
             var loadDiv = document.createElement("div");
             loadDiv.className = "loader";
             loadDiv.id = "load";
-            contain.appendChild(loadDiv)
+            contain.appendChild(loadDiv);
             console.log(file.name);
             
             const formData = new FormData();
@@ -74,9 +77,39 @@ export default function FileUploader() {
             })
             .catch(err => console.log(err));
         }else{
-            alert("Select file to upload!")
+            alert("Select file to upload!");
         }
     }
+    
+    function inputBadChar() {
+        const symbols = htrData["SymbolList"];
+        const charData = {newChar: wrongChar, numVal: rightNum};
+        for (let i = 0; i < symbols.length; i++) {
+            if (wrongChar === symbols[i]){
+                // Change value in current symbol set to adjust dataset for user?
+                symbols[i] = rightNum;
+                axios.post("/updateDictionary", charData)
+                .then(response => {
+                    if (response.data.Check) {
+                        console.log("Value added to the dictionary");
+                        //Have a response message show to the user
+                        setMessage(response.data.Message);
+                    }
+                    else {
+                        console.log("Value already in the dictionary or failed to be added");
+                        //Have a response message show to the user
+                        setMessage(response.data.Message);
+                    }
+                })
+                .catch(err => console.log(err));
+                break;
+            }
+            else {
+                console.log("Character Not Found In Dataset");
+            }
+        }
+    }
+    
     if(!htrDataRecieved){
         return (
             <body>
@@ -317,6 +350,36 @@ export default function FileUploader() {
                             <form>
                                 <label for="sub-button">Submit</label>
                                 <input class="file-input o" id="sub-button" type="submit"></input>
+                            </form>
+                            <form onSubmit={inputBadChar}>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            Enter Wrong Character: 
+                                        </td>
+                                        <td>
+                                            <input type="text" onChange={e => setWrongChar(e.target.value)}></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Enter Replacement Number: 
+                                        </td>
+                                        <td>
+                                            <input type="number" onChange={e => setRightNum(e.target.value)}></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button type="submit">Correct</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {message}
+                                        </td>
+                                    </tr>
+                                </table>
                             </form>
                        </div>
                     </div>
