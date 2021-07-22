@@ -53,15 +53,17 @@ def upload_file():
 			doc = generate_htr_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 			doc_text = doc.full_text_annotation.text # HRT Api call
 			# print(doc_text)
-			
 			word_list = []
 			symbol_list = []
 			for word in doc_text.split():
 				nextWord = ""
 				for letter in word:
-					if letter in badCharDict:
-						symbol_list.append(badCharDict[letter])
-						nextWord += badCharDict[letter]
+					if letter in badCharDict.values():
+						for key,val in badCharDict.items():
+							if letter == val:
+								symbol_list.append(key)
+								nextWord += key
+								break
 						continue
 					nextWord += letter
 					symbol_list.append(letter)
@@ -96,11 +98,9 @@ def update_dict():
 		goodNum = request.json['numVal']
 		check = False
 		# Ensure the value is not an ascii char or return that message in the response
-		try:
-		    bad.decode('ascii')
-		except UnicodeDecodeError:
-			# Otherwise add it to the dict that would persist throughout the session unless we are using a database
-		    badCharDict[bad] = goodNum
+		if(len(bad) != len(bad.encode())):
+			# Add it to the dict that would persist throughout the session unless we are using a database
+		    badCharDict[goodNum] = bad
 		    print("Value added")
 		    message = "Value added"
 		    check = True

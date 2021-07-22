@@ -30,7 +30,8 @@ body {
 
 .main {
   display: grid;
-  grid-template-columns: 800px;
+  grid-template-columns: 800px 800px;
+  column-gap: 80px;
   margin-left: -180px;
 }
 
@@ -73,3 +74,24 @@ body {
   text-align: center;
 }
 
+.vid-contain {
+    width: 30vw;
+    height: 32vh;
+    border: 15px solid black;
+}
+.vid-align {
+  align-self: end;
+}
+.login-button {
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    background: #ebebeb;
+    color:#EB6A5A;
+    font-size: 1em;
+    line-height: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    height: 5%;
+    width: 10%;
+}

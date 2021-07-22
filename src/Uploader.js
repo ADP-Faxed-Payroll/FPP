@@ -52,7 +52,7 @@ export default function FileUploader() {
             loadDiv.id = "load";
             contain.appendChild(loadDiv);
             console.log(file.name);
-            
+            setMessage('');
             const formData = new FormData();
             
             // Update the formData object
@@ -106,6 +106,7 @@ export default function FileUploader() {
             }
             else {
                 console.log("Character Not Found In Dataset");
+                setMessage("Character Not Found In Dataset");
             }
         }
     }
@@ -121,7 +122,7 @@ export default function FileUploader() {
                     </header>
                     <div class="u-grid">
                         <div class="prev-img">
-                            <h5 class="text-c">Image Preview</h5>
+                            <h4 class="text-c">Image Preview</h4>
                             <img className="FileImage"  id="doc" src={file? URL.createObjectURL(file) : null} alt={file? file.name : null} />
                         </div>
                         <div id="upload-contain">
@@ -351,36 +352,37 @@ export default function FileUploader() {
                                 <label for="sub-button">Submit</label>
                                 <input class="file-input o" id="sub-button" type="submit"></input>
                             </form>
-                            <form onSubmit={inputBadChar}>
+                            <div class="n-uploader pad">
                                 <table>
                                     <tr>
-                                        <td>
-                                            Enter Wrong Character: 
+                                        <td class="text-c">
+                                            <strong>Incorrect Character</strong>
                                         </td>
                                         <td>
-                                            <input type="text" onChange={e => setWrongChar(e.target.value)}></input>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Enter Replacement Number: 
-                                        </td>
-                                        <td>
-                                            <input type="number" onChange={e => setRightNum(e.target.value)}></input>
+                                        <td class="text-c">
+                                            <strong>Replacement Number</strong>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <button type="submit">Correct</button>
+                                        <td class="text-c">
+                                            <input class="s-input-box" type="text" maxlength="1" placeholder="Non-ASCII" onChange={e => setWrongChar(e.target.value)}></input>
                                         </td>
-                                    </tr>
-                                    <tr>
                                         <td>
-                                            {message}
+                                        <strong>-{">"}</strong>
+                                        </td>
+                                        <td class="text-c">
+                                            <input class="s-input-box" type="number" maxlength="1" placeholder="Number" onChange={e => setRightNum(e.target.value)}></input>
                                         </td>
                                     </tr>
                                 </table>
-                            </form>
+                                <button class="bad-char-button" onClick={inputBadChar}>Correct</button>
+                            </div>
+                            {message !== '' &&
+                                <div class="text-c">
+                                    {message}
+                                </div>
+                            }
                        </div>
                     </div>
                     <div>
