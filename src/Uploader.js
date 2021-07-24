@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import './app.css';
 import DocText from './DocText';
+import landingImage from './adp_logo1.png';
 
 import TableRow from './TableRow';
 import Landing from './Landing';
@@ -28,14 +29,26 @@ export default function FileUploader() {
     function rotateImg() {
         if (
       document.getElementById("doc")){
-          rotation={RotateDoc};
+
+    function rotateImg() {
+        if (document.getElementById("doc")){
             setRotateDoc(RotateDoc+90); // add 90 degrees, you can change this as you want
-            if (rotation === 360) { 
+            if (RotateDoc === 90 || RotateDoc === 270) {
+                document.getElementById("upload-contain").style.marginTop = "7vw";
+                document.getElementById("upload-contain").style.height = "50%";
+            }
+            else if (RotateDoc === 360) { 
             // 360 means rotate back to 0
                 setRotateDoc(0);
+                document.getElementById("upload-contain").style.marginTop = "0";
+                document.getElementById("upload-contain").style.height = "100%";
             }
-        console.log(RotateDoc);
-          document.querySelector("#doc").style.transform = `rotate(${RotateDoc}deg)`;
+            else {
+                document.getElementById("upload-contain").style.marginTop = "0";
+                document.getElementById("upload-contain").style.height = "100%";
+            }
+            console.log(RotateDoc)  
+            document.querySelector("#doc").style.transform = `rotate(${RotateDoc}deg)`;
         }  
     }
       
@@ -45,7 +58,11 @@ export default function FileUploader() {
     }
     function onFileUpload(){
         if (file!=null){
-        
+            var contain = document.getElementById("upload-contain");
+            var loadDiv = document.createElement("div");
+            loadDiv.className = "loader";
+            loadDiv.id = "load";
+            contain.appendChild(loadDiv)
             console.log(file.name);
             
             const formData = new FormData();
@@ -79,17 +96,45 @@ export default function FileUploader() {
     
     if(!htrDataRecieved){
         return (
-            <div>
-                <button onClick={openLandingPage}>Landing Page</button>
-                <input type="file" name="file" onChange={onFileChange} />
-                <button onClick={onFileUpload}>
-                    Upload!
-                </button>
-                <div>
-                    <img className="FileImage"  id="doc" src={file? URL.createObjectURL(file) : null} alt={file? file.name : null} />
+            <body>
+                <div class="upload-body">
+                    <header>
+                        <a href="Landing.js">
+                            <img class="adp-img" src={landingImage} alt="ADP Logo" />
+                        </a>
+                    </header>
+                    <div class="u-grid">
+                        <div class="prev-img">
+                            <h5 class="text-c">Image Preview</h5>
+                            <img className="FileImage"  id="doc" src={file? URL.createObjectURL(file) : null} alt={file? file.name : null} />
+                        </div>
+                        <div id="upload-contain">
+                            <div class="uploader n-uploader">
+                                <h3 class="text-c mtb">Upload Payroll File</h3>
+                                <label for="file">Select File</label>
+                                <h5 class="text-c mtb">Accepted file types: .pdf</h5>
+                                <button class="up-button" onClick={onFileUpload}>
+                                    Upload
+                                </button>
+                                <input class="file-input" type="file" name="file" id="file" onChange={onFileChange} />
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <button onClick={rotateImg}>Rotate Image</button>
-            </div>
+                <div>
+                    <footer class="footer-text location">
+                        <p>Made By: Kyle Partyka, AJ Ong, Giovanni DeRosa</p>
+                        <a href="https://github.com/kwp5/">
+                            <img
+                                src="https://www.clipartmax.com/png/middle/48-483031_github-logo-black-and-white-github-icon-vector.png"
+                                width="75"
+                                height="75"
+                                alt="Github logo"
+                            ></img>
+                        </a>
+                    </footer>
+                </div>
+            </body>
           );
     }else{
         return (
@@ -145,8 +190,38 @@ export default function FileUploader() {
                     </table>
                 </div>
                 <DocText htrData={htrData} />
-
-            </div>
+                        </div>
+                        <div id="upload-contain" class="n-uploader sizing">
+                            <h3 class="text-c mtb">Upload Payroll File</h3>
+                            <label for="file">Select File</label>
+                            <h5 class="text-c mtb">Accepted file types: .pdf</h5>
+                            <button class="up-button" onClick={onFileUpload}>
+                                Upload
+                            </button>
+                            <input class="file-input" type="file" name="file" id="file" onChange={onFileChange} />
+                        </div>
+                        <div>
+                            <form>
+                                <label for="sub-button">Submit</label>
+                                <input class="file-input o" id="sub-button" type="submit"></input>
+                            </form>
+                       </div>
+                    </div>
+                    <div>
+                        <footer class="footer-text olocation">
+                            <p>Made By: Kyle Partyka, AJ Ong, Giovanni DeRosa</p>
+                            <a href="https://github.com/kwp5/">
+                                <img
+                                    src="https://www.clipartmax.com/png/middle/48-483031_github-logo-black-and-white-github-icon-vector.png"
+                                    width="75"
+                                    height="75"
+                                    alt="Github logo"
+                                ></img>
+                            </a>
+                        </footer>
+                    </div>
+                </div>
+            </body>
           );
     }
 }
