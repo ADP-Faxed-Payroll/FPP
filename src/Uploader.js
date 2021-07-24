@@ -4,31 +4,16 @@ import './app.css';
 import DocText from './DocText';
 import landingImage from './adp_logo1.png';
 
-import TableRow from './TableRow';
-import Landing from './Landing';
-
 export default function FileUploader() {
    const [file, setFile] = useState();
    //  [fileSubmitted, setFileSubmitted] = useState(false);
    const [htrData, setHTRData] = useState({	WordList: [],
+                            				SymbolList: [],
                             				WordConfidence: [],
-                            				DocText: '',
-                                            Matrix: [],
-   }); // JSON state object
+                            				SymbolConfidence: [],
+                            				DocText: ''}); // JSON state object
     const[htrDataRecieved, setHTRDataRecieved] = useState(false);
-    
     const [RotateDoc, setRotateDoc] = useState(0);
-    
-    const [landingPage, setLandingPage] = useState(false);
-    
-    function openLandingPage(){
-        setLandingPage(true);
-    }
-   
-    let rotation = 0;
-    function rotateImg() {
-        if (
-      document.getElementById("doc")){
 
     function rotateImg() {
         if (document.getElementById("doc")){
@@ -75,25 +60,23 @@ export default function FileUploader() {
             // Send formData object
             axios.post("/upload", formData)
             .then(response => { // Response from backend
+                console.log(response.data);
+                console.log("WordList: " + response.data.WordList);
+                console.log("SymbolList: " + response.data.SymbolList);
+                console.log("WordConfidence: " + response.data.WordConfidence);
+                console.log("SymbolConfidence: " + response.data.SymbolConfidence);
                 setHTRData({WordList: response.data.WordList,
+                            SymbolList: response.data.SymbolList,
                             WordConfidence: response.data.WordConfidence,
-                            DocText: response.data.DocText,
-                            Matrix: response.data.Matrix,
-                });
+                            SymbolConfidence: response.data.SymbolConfidence});
+                loadDiv.remove();
                 setHTRDataRecieved(true);
             })
             .catch(err => console.log(err));
         }else{
-            alert("Select file to upload!");
+            alert("Select file to upload!")
         }
     }
-    
-    if(landingPage){
-        return(
-            <Landing/>
-            );
-    }
-    
     if(!htrDataRecieved){
         return (
             <body>
@@ -138,58 +121,188 @@ export default function FileUploader() {
           );
     }else{
         return (
-            <div>
-                <button onClick={openLandingPage}>Landing Page</button>
-                <input type="file" name="file" onChange={onFileChange} />
-                <button onClick={onFileUpload}>
-                    Upload!
-                </button>
-                <div>
-                    <img className="FileImage"  id="doc" src={file? URL.createObjectURL(file) : null} alt={file? file.name : null} />
-                </div>
-                    <button onClick={rotateImg}>Rotate Image</button>
-                <div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Employee Information</th>
-                                <th>Regular Hours</th>
-                                <th>salary amount</th>
-                                <th>Overtime Hours</th>
-                                <th>Vacation Hours</th>
-                                <th>Sick Hours</th>
-                                <th>Personal Hours</th>
-                                <th>Holiday Hours</th>
-                                <th>Bonus Amounts</th>
-                                <th>Misc Amounts</th>
-                                <th>stand by hours</th>
-                                <th>Notes</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {htrData.Matrix.map((item, index) => (
-                                <TableRow
-                                key={index}
-                                rowNumber={index}
-                                item={item}
-                                eI={item[0]}
-                                rH={item[1]}
-                                sA={item[2]}
-                                oH={item[3]}
-                                vH={item[4]}
-                                siH={item[5]}
-                                pH={item[6]}
-                                hH={item[7]}
-                                bA={item[8]}
-                                mA={item[9]}
-                                stH={item[10]}
-                                n={item[11]}
-                                />
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-                <DocText htrData={htrData} />
+            <body>
+                <div class="upload-body">
+                    <header>
+                        <a href="Landing.js">
+                            <img class="adp-img" src={landingImage} alt="ADP Logo" />
+                        </a>
+                    </header>
+                    <div class="tgrid">
+                        <div>
+                            <h5 class="text-c" id="prev-text">Image Preview</h5>
+                            <img className="FileImage"  id="doc" src={file? URL.createObjectURL(file) : null} alt={file? file.name : null} />
+                            <button class="rotate-button" onClick={rotateImg}>Rotate Image</button>
+                        </div>
+                        <div class="result-grid">
+                            <span class="h"><strong>Employee Information</strong></span>
+                            <span class="h"><strong>Regular Hours</strong></span>
+                            <span class="h"><strong>salary amount</strong></span>
+                            <span class="h"><strong>Overtime Hours</strong></span>
+                            <span class="h"><strong>Vacation Hours</strong></span>
+                            <span class="h"><strong>Sick Hours</strong></span>
+                            <span class="h"><strong>Personal Hours</strong></span>
+                            <span class="h"><strong>Holiday Hours</strong></span>
+                            <span class="h"><strong>Bonus Amounts</strong></span>
+                            <span class="h"><strong>Misc Amounts</strong></span>
+                            <span class="h"><strong>stand by hours</strong></span>
+                            <span class="h"><strong>Notes</strong></span>
+
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+                            <span contenteditable='true'>{htrData.WordList[90000]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+                            <span contenteditable='true'>{htrData.WordList[90000]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+                            <span contenteditable='true'>{htrData.WordList[90000]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+                            <span contenteditable='true'>{htrData.WordList[90000]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+                            <span contenteditable='true'>{htrData.WordList[90000]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+                            <span contenteditable='true'>{htrData.WordList[90000]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+    
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+                            <span contenteditable='true'>{htrData.WordList[90000]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+                            <span contenteditable='true'>{htrData.WordList[1]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
+                            <span contenteditable='true'>{htrData.WordList[90000]}</span>
+                            <span contenteditable='true'>Dolor</span>
+                            <span contenteditable='true'>Ipsum</span>
+                            <span contenteditable='true'>Lorem</span>
                         </div>
                         <div id="upload-contain" class="n-uploader sizing">
                             <h3 class="text-c mtb">Upload Payroll File</h3>

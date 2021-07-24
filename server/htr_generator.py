@@ -21,6 +21,7 @@ def generate_htr_file(file_path):
 
 def get_confidence_levels(response):
     word_confidence = []
+    symbol_confidence = []
     pages = response.full_text_annotation.pages
     for page in pages:
         for block in page.blocks:
@@ -34,13 +35,28 @@ def get_confidence_levels(response):
                     word_confidence.append(word.confidence)
                     #print('Word text: {0} (confidence: {1}'.format(word_text, word.confidence))
     
-                    # for symbol in word.symbols:
+                    for symbol in word.symbols:
+                        symbol_confidence.append(symbol.confidence)
                         #print('\tSymbol: {0} (confidence: {1}'.format(symbol.text, symbol.confidence))
-    return word_confidence
+    return word_confidence, symbol_confidence
     
 def get_vertices(response):
     texts = response.text_annotations
+    
+    employee_information = []
+    regular_hours = []
+    salary_hours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    overtime_hours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    vacation_hours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    sick_hours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    personal_hours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    holiday_hours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    bonus_amount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    misc_amount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    standby_hours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    notes = ["", "", "", "", "", "", "", "", "", "", "", ""]
     ignored_words = ['Employee', 'Information', 'Regular', 'Hours', 'Salary', 'Amount', 'Overtime', 'Vacation', 'Sick', 'Personal', 'Holiday', 'Bonus', 'Misc', 'Standby', 'Notes']
+    ctr = 0
     
     print('Texts:')
     TL= [383,3113] ####################Box coordinates
@@ -50,9 +66,13 @@ def get_vertices(response):
     Y_shift=218
     X_shift=120
     w, h = 12, 12;
-    Matrix = [['' for x in range(w)] for y in range(h)]
+    Matrix = [[0 for x in range(w)] for y in range(h)]
+    
+    
+    
         
-    #for-loop that is going to go through each of the 144 boxes 1 by 1 and will store them in a matrix
+        #for-loop that is going to go through each of the 144 boxes 1 by 1 and will store them in a matrix
+        
     for row in range(12):
         TL[0]=TL[0]+row*X_shift #resets the first index in the box coordinates that are initiated above
         BL[0]=BL[0]+row*X_shift
@@ -98,8 +118,9 @@ def get_vertices(response):
                 if avg_y > TR[1] and avg_y <= TL[1] and avg_x > TR[0] and avg_x < BL[0] : # works
                     if text.description == ',' or text.description == '.':
                         continue
-                    if Matrix[row][column] != 0:
-                        Matrix[row][column] = ' '.join([Matrix[row][column], text.description])
+                    employee_information.append(text.description)
+                    if Matrix[row][column]!=0:
+                        Matrix[row][column] = ''.join([Matrix[row][column], text.description])
                     else:
                         Matrix[row][column] = text.description   
                     
@@ -118,9 +139,7 @@ def get_vertices(response):
     BR[0]=BR[0]+X_shift
         
 
-    print('Matrix:', Matrix)
-    
-    return Matrix
+    print(Matrix)
 
     
 """
