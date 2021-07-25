@@ -4,20 +4,20 @@ export default function TableRow(props) {
     console.log(props.rowNumber);
     console.log(props.item);
   return (
-    <tr>
-      <td contenteditable='true'>{props.eI}</td>
-      <td contenteditable='true'>{props.rH}</td>
-      <td contenteditable='true'>{props.sA}</td>
-      <td contenteditable='true'>{props.oH}</td>
-      <td contenteditable='true'>{props.vH}</td>
-      <td contenteditable='true'>{props.siH}</td>
-      <td contenteditable='true'>{props.pH}</td>
-      <td contenteditable='true'>{props.hH}</td>
-      <td contenteditable='true'>{props.bA}</td>
-      <td contenteditable='true'>{props.mA}</td>
-      <td contenteditable='true'>{props.stH}</td>
-      <td contenteditable='true'>{props.n}</td>
-    </tr>
+    <div class="result-grid">
+      <span contenteditable='true'>{props.eI}</span>
+      <span contenteditable='true'>{props.rH}</span>
+      <span contenteditable='true'>{props.sA}</span>
+      <span contenteditable='true'>{props.oH}</span>
+      <span contenteditable='true'>{props.vH}</span>
+      <span contenteditable='true'>{props.siH}</span>
+      <span contenteditable='true'>{props.pH}</span>
+      <span contenteditable='true'>{props.hH}</span>
+      <span contenteditable='true'>{props.bA}</span>
+      <span contenteditable='true'>{props.mA}</span>
+      <span contenteditable='true'>{props.stH}</span>
+      <span contenteditable='true'>{props.n}</span>
+    </div>
   );
 }
 /*    <tr>
