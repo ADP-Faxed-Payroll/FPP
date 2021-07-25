@@ -17,7 +17,7 @@ def generate_htr_file(file_path):
     # annotate Image Response
     response = client.document_text_detection(image=image)  # returns TextAnnotation
     
-    return (response)
+    return response
 
 def get_confidence_levels(response):
     word_confidence = []
@@ -25,60 +25,41 @@ def get_confidence_levels(response):
     pages = response.full_text_annotation.pages
     for page in pages:
         for block in page.blocks:
-            #print('block confidence:', block.confidence)
-    
+            # print('block confidence:', block.confidence)
             for paragraph in block.paragraphs:
-                #print('paragraph confidence:', paragraph.confidence)
-    
+                # print('paragraph confidence:', paragraph.confidence)
                 for word in paragraph.words:
-                    word_text = ''.join([symbol.text for symbol in word.symbols])
+                    # word_text = ''.join([symbol.text for symbol in word.symbols])
                     word_confidence.append(word.confidence)
-                    #print('Word text: {0} (confidence: {1}'.format(word_text, word.confidence))
-    
-                    for symbol in word.symbols:
-                        symbol_confidence.append(symbol.confidence)
-                        #print('\tSymbol: {0} (confidence: {1}'.format(symbol.text, symbol.confidence))
-    return word_confidence, symbol_confidence
+                    # print('Word text: {0} (confidence: {1}'.format(word_text, word.confidence))
+                    # for symbol in word.symbols:
+                        # symbol_confidence.append(symbol.confidence)
+                        # print('\tSymbol: {0} (confidence: {1}'.format(symbol.text, symbol.confidence))
+    return word_confidence
     
 def get_vertices(response):
     texts = response.text_annotations
-    
-    employee_information = []
-    regular_hours = []
-    salary_hours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    overtime_hours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    vacation_hours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    sick_hours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    personal_hours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    holiday_hours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    bonus_amount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    misc_amount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    standby_hours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    notes = ["", "", "", "", "", "", "", "", "", "", "", ""]
+
     ignored_words = ['Employee', 'Information', 'Regular', 'Hours', 'Salary', 'Amount', 'Overtime', 'Vacation', 'Sick', 'Personal', 'Holiday', 'Bonus', 'Misc', 'Standby', 'Notes']
-    ctr = 0
     
-    print('Texts:')
-    TL= [383,3113] ####################Box coordinates
+    # Box coordinates
+    # We can make these points dynamic by seeing where the word "Employee Information" is and using the distance from the letter E to the black line. 
+    TL= [383,3113]  
     BL= [503,3113]
     TR= [383,2585]
     BR= [503,2585]
     Y_shift=218
     X_shift=120
     w, h = 12, 12;
-    Matrix = [[0 for x in range(w)] for y in range(h)]
+    Matrix = [['' for x in range(w)] for y in range(h)]
     
-    
-    
-        
-        #for-loop that is going to go through each of the 144 boxes 1 by 1 and will store them in a matrix
-        
+    #for-loop that is going to go through each of the 144 boxes 1 by 1 and will store them in a matrix
     for row in range(12):
         TL[0]=TL[0]+row*X_shift #resets the first index in the box coordinates that are initiated above
         BL[0]=BL[0]+row*X_shift
         TR[0]=TR[0]+row*X_shift
         BR[0]=BR[0]+row*X_shift
-        for column in range(12):
+        for column in range(w):
             if column==1: #the column is making a jump that is different than the others due to it going from first box to second
                 TL[1]-=540
                 BL[1]-=540
@@ -94,9 +75,6 @@ def get_vertices(response):
                 BL[1]=(BL[1]-540)-((column-1)*Y_shift)
                 TR[1]=(TR[1]-218)-((column-1)*Y_shift)
                 BR[1]=(BR[1]-218)-((column-1)*Y_shift)
-            if column==0:
-                print("TR BR BL TL: ")
-                print(TR, BR, BL, TL)
             
             for text in texts:
                 avg_x=0
@@ -114,11 +92,7 @@ def get_vertices(response):
                 if text.description in ignored_words or vertex.x < 330:
                     continue
             
-                
                 if avg_y > TR[1] and avg_y <= TL[1] and avg_x > TR[0] and avg_x < BL[0] : # works
-                    if text.description == ',' or text.description == '.':
-                        continue
-                    employee_information.append(text.description)
                     if Matrix[row][column]!=0:
                         Matrix[row][column] = ''.join([Matrix[row][column], text.description])
                     else:
@@ -137,38 +111,62 @@ def get_vertices(response):
     BL[0]=BL[0]+X_shift
     TR[0]=TR[0]+X_shift
     BR[0]=BR[0]+X_shift
-        
-
+    
     print(Matrix)
+    
+    return Matrix
 
+def get_footers(response):
+    words = []
+    pages = response.full_text_annotation.pages
     
-"""
-lines = response.text_annotations[0].description
     
+    date_printed = ''
+    company = ''
+    frequency = ''
+    check_date = ''
+    pay_period = ''
     
-    items = []
-    lines = {}
-    
-    for text in response.text_annotations[1:]:
-        top_x_axis = text.bounding_poly.vertices[0].x
-        top_y_axis = text.bounding_poly.vertices[0].y
-        bottom_y_axis = text.bounding_poly.vertices[3].y
-    
-        if top_y_axis not in lines:
-            lines[top_y_axis] = [(top_y_axis, bottom_y_axis), []]
-    
-        for s_top_y_axis, s_item in lines.items():
-            if top_y_axis < s_item[0][1]:
-                lines[s_top_y_axis][1].append((top_x_axis, text.description))
-                break
-    
-    for _, item in lines.items():
-        if item[1]:
-            words = sorted(item[1], key=lambda t: t[0])
-            items.append((item[0], ' '.join([word for _, word in words]), words))
-    
-    print("ITEMS: ", items)
-    print('\n')
-    print("LINES: ", lines)
-    # print(response)
-"""
+    for page in pages:
+        for block in page.blocks:
+            for paragraph in block.paragraphs:
+                for word in paragraph.words:
+                    word_text = ''.join([symbol.text for symbol in word.symbols])
+                    words.append(word_text)
+
+    for x in range(len(words)):
+        if words[x] == 'Date' and words[x+1] == 'Printed' and words[x+2] == ':': 
+            while words[x+3] != 'Company':
+                date_printed += words[x+3]
+                x += 1
+                
+        if words[x] == 'Company' and words[x+1] == ':': 
+            while words[x+2] != 'Frequency':
+                if company == '':
+                    company = words[x+2]
+                else:
+                    company += ' ' + words[x+2]
+                x += 1
+                
+        if words[x] == 'Frequency' and words[x+1] == ':': 
+            while words[x+2] != 'Check':
+                frequency += words[x+2]
+                x += 1
+        
+        if words[x] == 'Check' and words[x+1] == 'Date' and words[x+2] == ':': 
+            while words[x+3] != 'Pay':
+                check_date += words[x+3]
+                x += 1
+                
+        if words[x] == 'Pay' and words[x+1] == 'Period' and words[x+2] == 'from' and words[x+3] == ':': 
+            while x+4 < len(words):
+                pay_period += words[x+4]
+                x += 1
+        
+    footers = {'date_printed': date_printed,
+               'company': company,
+               'frequency': frequency,
+               'check_date': check_date,
+               'pay_period': pay_period,
+    }
+    return footers

@@ -111,6 +111,19 @@ span {
     background-color: lightgrey;
 }
 
+.dp {
+    background-color: lightgrey;
+    grid-column: 9 / span 2;
+}
+
+.date-printed {
+    grid-column: 11 / span 2;
+}
+
+.two {
+    grid-column: 2 / span 4;
+}
+
 .n-uploader {
     border: 2px dashed black;
     border-radius: 10px;
