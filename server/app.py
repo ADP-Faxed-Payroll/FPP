@@ -55,24 +55,18 @@ def upload_file():
 			# print(doc_text)
 			
 			word_list = doc_text.split()
-			
-			symbol_list = []
-			for word in word_list:
-				for letter in word:
-					symbol_list.append(letter)
 
-			word_confidence, symbol_confidence = get_confidence_levels(doc);
+			word_confidence = get_confidence_levels(doc);
 			
-			get_vertices(doc)
+			matrix = get_vertices(doc)
 			
 			print('File successfully uploaded')
 
 			data = {
 				'WordList': word_list,
-				'SymbolList': symbol_list,
 				'WordConfidence': word_confidence,
-				'SymbolConfidence': symbol_confidence,
 				'DocText': doc_text,
+				'Matrix': matrix
 			}
 
 			return jsonify(data)
