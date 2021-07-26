@@ -183,6 +183,8 @@ export default function FileUploader() {
                             <img class="adp-img" src={landingImage} alt="ADP Logo" />
                         </a>
                     </header>
+                    
+                    
                     <div class="tgrid">
                         <div>
                             <h5 class="text-c" id="prev-text">Image Preview</h5>
@@ -361,20 +363,15 @@ export default function FileUploader() {
                             <span contenteditable='true' style={{color : htrData.ColorMatrix[11][10]}}>{htrData.Matrix[11][10]}</span>
                             <span contenteditable='true' style={{color : htrData.ColorMatrix[11][11]}}>{htrData.Matrix[11][11]}</span>
                             
-                            
                             <span class="h"><strong>Company</strong></span> 
                             <span contenteditable='true' class="two" style={{color : htrData.Footers['colors'][1]}}>{htrData.Footers['company']}</span>
-                            <span class="h"></span>
-                            <span class="h"></span>
-                            <span class="h"></span>
+                            <span class="clvl"><strong>Confidence Level Colors</strong></span>
                             <span class="dp"><strong>Date Printed</strong></span> 
                             <span contenteditable='true' class="date-printed" style={{color : htrData.Footers['colors'][0]}}>{htrData.Footers['date_printed']}</span>
                             
                             <span class="h"><strong>Frequency</strong></span> 
                             <span contenteditable='true' class="two" style={{color : htrData.Footers['colors'][2]}}>{htrData.Footers['frequency']}</span>
-                            <span class="h"></span>
-                            <span class="h"></span>
-                            <span class="h"></span>
+                            <span class="three" style={{color : "green"}}><strong>Confidence above 95%</strong></span>
                             <span class="h"></span>
                             <span class="h"></span>
                             <span class="h"></span>
@@ -382,9 +379,7 @@ export default function FileUploader() {
                             
                             <span class="h"><strong>Check Date</strong></span> 
                             <span contenteditable='true' class="two" style={{color : htrData.Footers['colors'][3]}}>{htrData.Footers['check_date']}</span>
-                            <span class="h"></span>
-                            <span class="h"></span>
-                            <span class="h"></span>
+                            <span class="three" style={{color : "orange"}}><strong>Confidence between 95%-85%</strong></span>
                             <span class="h"></span>
                             <span class="h"></span>
                             <span class="h"></span>
@@ -392,9 +387,7 @@ export default function FileUploader() {
                             
                             <span class="h"><strong>Pay Period</strong></span> 
                             <span contenteditable='true' class="two" style={{color : htrData.Footers['colors'][4]}}>{htrData.Footers['pay_period']}</span>
-                            <span class="h"></span>
-                            <span class="h"></span>
-                            <span class="h"></span>
+                            <span class="three" style={{color : "red"}}><strong>Confidence below 85%</strong></span>
                             <span class="h"></span>
                             <span class="h"></span>
                             <span class="h"></span>

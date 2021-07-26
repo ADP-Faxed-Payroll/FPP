@@ -118,6 +118,15 @@ span {
     grid-column: 2 / span 4;
 }
 
+.three {
+    grid-column: 6 / span 3;
+}
+
+.clvl {
+    background-color: lightgrey;
+    grid-column: 6 / span 3;
+}
+
 .n-uploader {
     border: 2px dashed black;
     border-radius: 10px;
