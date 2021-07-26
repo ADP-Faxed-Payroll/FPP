@@ -54,9 +54,38 @@ def upload_file():
 			doc = generate_htr_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 			doc_text = doc.full_text_annotation.text # HRT Api call
 			# print(doc_text)
+			
+			
+			word_confidence = get_confidence_levels(doc);
+			matrix, color_matrix = get_vertices(doc)
+			footers, footer_matrix = get_footers(doc)
+			
+			
 			word_list = []
 			symbol_list = []
-			for word in doc_text.split():
+			for row_ind, row in enumerate(matrix):
+				for col_ind, word in enumerate(row):
+					if col_ind == 0 or col_ind == 11 or not word:
+						continue
+					else:
+						nextWord = ""
+						for letter in word:
+							if letter in badCharDict:
+								nextWord += badCharDict[letter]
+								symbol_list.append(badCharDict[letter])
+								continue
+							nextWord += letter
+							symbol_list.append(letter)
+						
+						print('Before', matrix[row_ind][col_ind])
+						
+						matrix[row_ind][col_ind]=nextWord
+						nextWord = ""
+						print('After', matrix[row_ind][col_ind])
+			"""		
+			for ind, word in enumerate(doc_text.split()):
+				if ind == 0 or ind == 11:
+					continue
 				nextWord = ""
 				for letter in word:
 					if letter in badCharDict.values():
@@ -70,12 +99,11 @@ def upload_file():
 					symbol_list.append(letter)
 				word_list.append(nextWord)
 				nextWord = ""
+				"""
+				
+			print("Symbol List", symbol_list)
 
 
-			word_confidence = get_confidence_levels(doc);
-			
-			matrix, color_matrix = get_vertices(doc)
-			footers, footer_matrix = get_footers(doc)
 			
 			total_matrix = matrix
 			for lst in footer_matrix:
@@ -93,6 +121,7 @@ def upload_file():
 				'Footers': footers,
 				'Colors': color_matrix,
 				'TotalMatrix': total_matrix,
+				'SymbolList': symbol_list,
 			}
 			
 			return jsonify(data)
@@ -106,19 +135,14 @@ def update_dict():
 	if request.method == 'POST':
 		bad = request.json['newChar']
 		goodNum = request.json['numVal']
-		check = False
 		# Ensure the value is not an ascii char or return that message in the response
-		if(len(bad) != len(bad.encode())):
-			# Add it to the dict that would persist throughout the session unless we are using a database
-		    badCharDict[goodNum] = bad
-		    print("Value added")
-		    message = "Value added"
-		    check = True
-		else:
-		    print("It may have been an ascii-encoded unicode string")
-		    message = "Value was an ascii string"
+		# Add it to the dict that would persist throughout the session unless we are using a database
+		badCharDict[bad] = goodNum
+		print("Value added")
+		message = "Value added"
+		print(badCharDict)
+		
 		data = {
-			'Check': check,
 			'Message': message
 		}
 		return jsonify(data)

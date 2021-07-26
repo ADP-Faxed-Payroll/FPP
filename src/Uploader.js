@@ -15,6 +15,7 @@ export default function FileUploader() {
                             				Footers: {},
                             				ColorMatrix:[],
                             				TotalMatrix:[],
+                            				SymbolList:[],
                                             }); // JSON state object
     const[htrDataRecieved, setHTRDataRecieved] = useState(false);
     const [RotateDoc, setRotateDoc] = useState(0);
@@ -142,6 +143,7 @@ export default function FileUploader() {
                             Footers: response.data.Footers,
                             ColorMatrix: response.data.Colors,
                             TotalMatrix: response.data.TotalMatrix,
+                            SymbolList: response.data.SymbolList,
                             });
                 loadDiv.remove();
                 setHTRDataRecieved(true);
@@ -434,7 +436,7 @@ export default function FileUploader() {
                                     </tr>
                                     <tr>
                                         <td class="text-c">
-                                            <input class="s-input-box" type="text" maxlength="1" placeholder="Non-ASCII" onChange={e => setWrongChar(e.target.value)}></input>
+                                            <input class="s-input-box" type="text" maxlength="1" placeholder="Symbol" onChange={e => setWrongChar(e.target.value)}></input>
                                         </td>
                                         <td>
                                         <strong>-{">"}</strong>
@@ -739,7 +741,7 @@ export default function FileUploader() {
                                     </tr>
                                     <tr>
                                         <td class="text-c">
-                                            <input class="s-input-box" type="text" maxlength="1" placeholder="Non-ASCII" onChange={e => setWrongChar(e.target.value)}></input>
+                                            <input class="s-input-box" type="text" maxlength="1" placeholder="Symbol" onChange={e => setWrongChar(e.target.value)}></input>
                                         </td>
                                         <td>
                                         <strong>-{">"}</strong>
@@ -1104,7 +1106,7 @@ export default function FileUploader() {
                                     </tr>
                                     <tr>
                                         <td class="text-c">
-                                            <input class="s-input-box" type="text" maxlength="1" placeholder="Non-ASCII" onChange={e => setWrongChar(e.target.value)}></input>
+                                            <input class="s-input-box" type="text" maxlength="1" placeholder="Symbol" onChange={e => setWrongChar(e.target.value)}></input>
                                         </td>
                                         <td>
                                         <strong>-{">"}</strong>

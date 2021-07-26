@@ -58,9 +58,6 @@ export default function Landing() {
                 <button class="login-button" type="submit" onClick={Login}>Login</button>
               </div>
             </div>
-            <div class="vid-align">
-              <img class="vid-contain" />
-            </div>
           </div>
         </div>
       </header>
