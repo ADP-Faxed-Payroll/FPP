@@ -3,7 +3,7 @@ from google.cloud import vision
 
 import pandas as pd
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'ServiceAccountToken.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'google-credentials.json'
 
 client = vision.ImageAnnotatorClient()
 

@@ -24,4 +24,5 @@ yarn-error.log*
 
 __pycache__/
 ServiceAccountToken.json
-.env 
+.env
+google-credentials.json
