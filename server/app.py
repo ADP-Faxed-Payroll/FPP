@@ -76,40 +76,14 @@ def upload_file():
 								continue
 							nextWord += letter
 							symbol_list.append(letter)
-						
-						print('Before', matrix[row_ind][col_ind])
-						
+
 						matrix[row_ind][col_ind]=nextWord
 						nextWord = ""
-						print('After', matrix[row_ind][col_ind])
-			"""		
-			for ind, word in enumerate(doc_text.split()):
-				if ind == 0 or ind == 11:
-					continue
-				nextWord = ""
-				for letter in word:
-					if letter in badCharDict.values():
-						for key,val in badCharDict.items():
-							if letter == val:
-								symbol_list.append(key)
-								nextWord += key
-								break
-						continue
-					nextWord += letter
-					symbol_list.append(letter)
-				word_list.append(nextWord)
-				nextWord = ""
-				"""
-				
-			print("Symbol List", symbol_list)
-
 
 			
 			total_matrix = matrix
 			for lst in footer_matrix:
 				total_matrix.append(lst)
-				
-			print(total_matrix)
 			
 			print('File successfully uploaded')
 

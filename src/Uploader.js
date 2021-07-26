@@ -408,7 +408,7 @@ export default function FileUploader() {
                         <div id="upload-contain" class="n-uploader sizing">
                             <h3 class="text-c mtb">Upload Payroll File</h3>
                             <label for="file">Select File</label>
-                            <h5 class="text-c mtb">Accepted file types: .pdf</h5>
+                            <h5 class="text-c mtb">Accepted file types: .jpg .png</h5>
                             <button class="up-button" onClick={onFileUpload}>
                                 Upload
                             </button>
@@ -716,7 +716,7 @@ export default function FileUploader() {
                         <div id="upload-contain" class="n-uploader sizing">
                             <h3 class="text-c mtb">Upload Payroll File</h3>
                             <label for="file">Select File</label>
-                            <h5 class="text-c mtb">Accepted file types: .pdf</h5>
+                            <h5 class="text-c mtb">Accepted file types: .jpg .png</h5>
                             <button class="up-button" onClick={onFileUpload}>
                                 Upload
                             </button>
@@ -815,7 +815,7 @@ export default function FileUploader() {
                             <div class="uploader n-uploader">
                                 <h3 class="text-c mtb">Upload Payroll File</h3>
                                 <label for="file">Select File</label>
-                                <h5 class="text-c mtb">Accepted file types: .pdf</h5>
+                                <h5 class="text-c mtb">Accepted file types: .jpg .png</h5>
                                 <button class="up-button" onClick={onFileUpload}>
                                     Upload
                                 </button>
@@ -1081,7 +1081,7 @@ export default function FileUploader() {
                         <div id="upload-contain" class="n-uploader sizing">
                             <h3 class="text-c mtb">Upload Payroll File</h3>
                             <label for="file">Select File</label>
-                            <h5 class="text-c mtb">Accepted file types: .pdf</h5>
+                            <h5 class="text-c mtb">Accepted file types: .jpg .png</h5>
                             <button class="up-button" onClick={onFileUpload}>
                                 Upload
                             </button>
