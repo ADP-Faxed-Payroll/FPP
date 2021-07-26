@@ -16,7 +16,7 @@ print(UPLOAD_FOLDER)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER # defines path for upload folder
 
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 # as large as 16MB
-
+badCharDict = {}
 
 ALLOWED_EXTENSIONS = set(['pdf', 'png', 'jpg', 'jpeg'])
 
@@ -53,8 +53,23 @@ def upload_file():
 			doc = generate_htr_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 			doc_text = doc.full_text_annotation.text # HRT Api call
 			# print(doc_text)
-			
-			word_list = doc_text.split()
+			word_list = []
+			symbol_list = []
+			for word in doc_text.split():
+				nextWord = ""
+				for letter in word:
+					if letter in badCharDict.values():
+						for key,val in badCharDict.items():
+							if letter == val:
+								symbol_list.append(key)
+								nextWord += key
+								break
+						continue
+					nextWord += letter
+					symbol_list.append(letter)
+				word_list.append(nextWord)
+				nextWord = ""
+
 
 			word_confidence = get_confidence_levels(doc);
 			
@@ -76,6 +91,29 @@ def upload_file():
 		else:
 			print('Allowed file types are pdf, png, jpg, jpeg')
 			return redirect(request.url)
+
+@app.route('/updateDictionary', methods=['POST'])
+def update_dict():
+	
+	if request.method == 'POST':
+		bad = request.json['newChar']
+		goodNum = request.json['numVal']
+		check = False
+		# Ensure the value is not an ascii char or return that message in the response
+		if(len(bad) != len(bad.encode())):
+			# Add it to the dict that would persist throughout the session unless we are using a database
+		    badCharDict[goodNum] = bad
+		    print("Value added")
+		    message = "Value added"
+		    check = True
+		else:
+		    print("It may have been an ascii-encoded unicode string")
+		    message = "Value was an ascii string"
+		data = {
+			'Check': check,
+			'Message': message
+		}
+		return jsonify(data)
 
 if __name__ == "__main__":
     app.run(

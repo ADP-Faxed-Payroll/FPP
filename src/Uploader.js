@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './app.css';
 import landingImage from './adp_logo1.png';
 import TableRow from './TableRow';
@@ -15,6 +15,9 @@ export default function FileUploader() {
                                             }); // JSON state object
     const[htrDataRecieved, setHTRDataRecieved] = useState(false);
     const [RotateDoc, setRotateDoc] = useState(0);
+    const [wrongChar, setWrongChar] = useState('');
+    const [rightNum, setRightNum] = useState('');
+    const [message, setMessage] = useState('');
 
     function rotateImg() {
         if (document.getElementById("doc")){
@@ -33,7 +36,7 @@ export default function FileUploader() {
                 document.getElementById("upload-contain").style.marginTop = "0";
                 document.getElementById("upload-contain").style.height = "100%";
             }
-            console.log(RotateDoc)  
+            console.log(RotateDoc);
             document.querySelector("#doc").style.transform = `rotate(${RotateDoc}deg)`;
         }  
     }
@@ -42,14 +45,17 @@ export default function FileUploader() {
         console.log(e.target.files[0]);
         setFile(e.target.files[0]);
     }
+    
     function onFileUpload(){
         if (file!=null){
             var contain = document.getElementById("upload-contain");
             var loadDiv = document.createElement("div");
             loadDiv.className = "loader";
             loadDiv.id = "load";
-            contain.appendChild(loadDiv)
-            
+            contain.appendChild(loadDiv);
+            console.log(file.name);
+            setMessage('');
+
             const formData = new FormData();
             
             // Update the formData object
@@ -71,9 +77,40 @@ export default function FileUploader() {
             })
             .catch(err => console.log(err));
         }else{
-            alert("Select file to upload!")
+            alert("Select file to upload!");
         }
     }
+    
+    function inputBadChar() {
+        const symbols = htrData["SymbolList"];
+        const charData = {newChar: wrongChar, numVal: rightNum};
+        for (let i = 0; i < symbols.length; i++) {
+            if (wrongChar === symbols[i]){
+                // Change value in current symbol set to adjust dataset for user?
+                symbols[i] = rightNum;
+                axios.post("/updateDictionary", charData)
+                .then(response => {
+                    if (response.data.Check) {
+                        console.log("Value added to the dictionary");
+                        //Have a response message show to the user
+                        setMessage(response.data.Message);
+                    }
+                    else {
+                        console.log("Value already in the dictionary or failed to be added");
+                        //Have a response message show to the user
+                        setMessage(response.data.Message);
+                    }
+                })
+                .catch(err => console.log(err));
+                break;
+            }
+            else {
+                console.log("Character Not Found In Dataset");
+                setMessage("Character Not Found In Dataset");
+            }
+        }
+    }
+    
     if(!htrDataRecieved){
         return (
             <body>
@@ -85,7 +122,7 @@ export default function FileUploader() {
                     </header>
                     <div class="u-grid">
                         <div class="prev-img">
-                            <h5 class="text-c">Image Preview</h5>
+                            <h4 class="text-c">Image Preview</h4>
                             <img className="FileImage"  id="doc" src={file? URL.createObjectURL(file) : null} alt={file? file.name : null} />
                         </div>
                         <div id="upload-contain">
@@ -357,6 +394,37 @@ export default function FileUploader() {
                                 <label for="sub-button">Submit</label>
                                 <input class="file-input o" id="sub-button" type="submit"></input>
                             </form>
+                            <div class="n-uploader pad">
+                                <table>
+                                    <tr>
+                                        <td class="text-c">
+                                            <strong>Incorrect Character</strong>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td class="text-c">
+                                            <strong>Replacement Number</strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-c">
+                                            <input class="s-input-box" type="text" maxlength="1" placeholder="Non-ASCII" onChange={e => setWrongChar(e.target.value)}></input>
+                                        </td>
+                                        <td>
+                                        <strong>-{">"}</strong>
+                                        </td>
+                                        <td class="text-c">
+                                            <input class="s-input-box" type="number" maxlength="1" placeholder="Number" onChange={e => setRightNum(e.target.value)}></input>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <button class="bad-char-button" onClick={inputBadChar}>Correct</button>
+                            </div>
+                            {message !== '' &&
+                                <div class="text-c">
+                                    {message}
+                                </div>
+                            }
                        </div>
                     </div>
                     <div>

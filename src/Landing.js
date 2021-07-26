@@ -35,23 +35,31 @@ export default function Landing() {
                 <table class="form-table">
                   <tr>
                     <td>
-                      Username :
-                    </td>
-                    <td>
-                      <input type="text" placeholder="Enter Username" name="username" />
+                      <strong>Username </strong>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      Password :
+                      <input type="text" name="username" />
                     </td>
+                  </tr>
+                  <tr>
                     <td>
-                      <input type="password" placeholder="Enter Password" name="password" />
+                      <strong>Password </strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input type="password" name="password" />
                     </td>
                   </tr>
                 </table>
-                <button type="submit" onClick={Login}>Login</button>
+                <br />
+                <button class="login-button" type="submit" onClick={Login}>Login</button>
               </div>
+            </div>
+            <div class="vid-align">
+              <img class="vid-contain" />
             </div>
           </div>
         </div>
