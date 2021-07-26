@@ -1,1 +1,1 @@
-echo ${GOOGLE_CREDENTIALS} > /app/ServiceAccountToken.json
+echo ${GOOGLE_CREDENTIALS} > /app/server/ServiceAccountToken.json
