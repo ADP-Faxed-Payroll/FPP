@@ -1,6 +1,5 @@
 alembic==1.6.5
 astroid==2.3.0
-aws-cfn-bootstrap==2.0
 backcall==0.2.0
 beautifulsoup4==4.9.3
 bidict==0.21.2
