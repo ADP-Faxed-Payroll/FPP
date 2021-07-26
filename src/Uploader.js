@@ -3,6 +3,7 @@ import { useState } from 'react';
 import './app.css';
 import landingImage from './adp_logo1.png';
 import TableRow from './TableRow';
+import { CSVLink, CSVDownload } from "react-csv";
 
 export default function FileUploader() {
    const [file, setFile] = useState();
@@ -18,6 +19,12 @@ export default function FileUploader() {
     const [wrongChar, setWrongChar] = useState('');
     const [rightNum, setRightNum] = useState('');
     const [message, setMessage] = useState('');
+    const headers = [
+          { label: "First Name", key: "firstName" },
+          { label: "Last Name", key: "lastName" },
+          { label: "Email", key: "email" },
+          { label: "Age", key: "age" }
+        ];
 
     function rotateImg() {
         if (document.getElementById("doc")){
@@ -44,6 +51,13 @@ export default function FileUploader() {
     function onFileChange(e){
         console.log(e.target.files[0]);
         setFile(e.target.files[0]);
+    }
+    
+    function onSubmit(matrixData){
+        let csvContent = "data:text/csv;charset=utf-8," 
+        + matrixData.map(e => e.join(",")).join("\n");
+        var encodedUri = encodeURI(csvContent);
+        window.open(encodedUri);
     }
     
     function onFileUpload(){
@@ -392,8 +406,11 @@ export default function FileUploader() {
                         <div>
                             <form>
                                 <label for="sub-button">Submit</label>
-                                <input class="file-input o" id="sub-button" type="submit"></input>
+                                <br />
+                                <CSVLink  className="csvDL" data={htrData.Matrix}>Download</CSVLink>
+                                <br />
                             </form>
+                           
                             <div class="n-uploader pad">
                                 <table>
                                     <tr>

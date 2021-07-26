@@ -59,6 +59,8 @@ body {
     left: 0;
 }
 
+
+
 .uploader {
     margin-top: 290px;
     height: 165px;
@@ -164,6 +166,22 @@ form > label {
 .file-input {
     width: 0.1px;
     height: 0.1px;
+}
+
+.csvDL {
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    background: #ebebeb;
+    color:#EB6A5A;
+    font-size: 1em;
+    line-height: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    height: 20%;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .up-button {
