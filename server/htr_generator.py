@@ -35,7 +35,6 @@ def get_confidence_levels(response):
                     # for symbol in word.symbols:
                         # symbol_confidence.append(symbol.confidence)
                         # print('\tSymbol: {0} (confidence: {1}'.format(symbol.text, symbol.confidence))
-    print(len(word_confidence))
     return word_confidence
     
 def get_vertices(response):
@@ -157,6 +156,12 @@ def get_footers(response):
     word_confidence = get_confidence_levels(response)
     ctr = 0
     color = []
+    footers_matrix = [['' for x in range(12)] for y in range(4)]
+    footers_matrix[0][0] = 'Company:'
+    footers_matrix[0][10] = 'Date Printed:'
+    footers_matrix[1][0] = 'Frequency:'
+    footers_matrix[2][0] = 'Check Date:'
+    footers_matrix[3][0] = 'Pay Period from:'
     
     for page in pages:
         for block in page.blocks:
@@ -175,6 +180,7 @@ def get_footers(response):
                 date_printed += words[x+3]
                 x += 1
             color.append(total/ctr)
+            footers_matrix[0][11] = date_printed
             
                 
         if words[x] == 'Company' and words[x+1] == ':':
@@ -189,6 +195,7 @@ def get_footers(response):
                     company += ' ' + words[x+2]
                 x += 1
             color.append(total/ctr)
+            footers_matrix[0][1] = company
                 
         if words[x] == 'Frequency' and words[x+1] == ':':
             total = 0
@@ -199,6 +206,7 @@ def get_footers(response):
                 frequency += words[x+2]
                 x += 1
             color.append(total/ctr)
+            footers_matrix[1][1] = frequency
         
         if words[x] == 'Check' and words[x+1] == 'Date' and words[x+2] == ':': 
             total = 0
@@ -209,6 +217,7 @@ def get_footers(response):
                 check_date += words[x+3]
                 x += 1
             color.append(total/ctr)
+            footers_matrix[2][1] = check_date
                 
         if words[x] == 'Pay' and words[x+1] == 'Period' and words[x+2] == 'from' and words[x+3] == ':': 
             while x+4 < len(words):
@@ -217,6 +226,7 @@ def get_footers(response):
                 pay_period += words[x+4]
                 x += 1
             color.append(total/ctr)
+            footers_matrix[3][1] = pay_period
     
     for x in range(len(color)):
         if color[x] >= 0.95:
@@ -235,4 +245,4 @@ def get_footers(response):
                'pay_period': pay_period,
                'colors': color,
     }
-    return footers
+    return footers, footers_matrix

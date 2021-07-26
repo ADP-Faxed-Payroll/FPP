@@ -75,7 +75,13 @@ def upload_file():
 			word_confidence = get_confidence_levels(doc);
 			
 			matrix, color_matrix = get_vertices(doc)
-			footers = get_footers(doc)
+			footers, footer_matrix = get_footers(doc)
+			
+			total_matrix = matrix
+			for lst in footer_matrix:
+				total_matrix.append(lst)
+				
+			print(total_matrix)
 			
 			print('File successfully uploaded')
 
@@ -86,6 +92,7 @@ def upload_file():
 				'Matrix': matrix,
 				'Footers': footers,
 				'Colors': color_matrix,
+				'TotalMatrix': total_matrix,
 			}
 			
 			return jsonify(data)
