@@ -1,6 +1,6 @@
 import os
 import urllib.request
-from flask import Flask, request, redirect, render_template, jsonify
+from flask import Flask, send_from_directory, request, redirect, render_template, jsonify
 from werkzeug.utils import secure_filename
 from htr_generator import generate_htr_file, get_confidence_levels, get_vertices, get_footers
 
@@ -23,6 +23,12 @@ ALLOWED_EXTENSIONS = set(['pdf', 'png', 'jpg', 'jpeg'])
 
 def allowed_file(filename):
 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/', defaults={"filename": "index.html"})
+@app.route('/<path:filename>')
+def index(filename):
+    '''Tells python where our index file is that renders our React Components'''
+    return send_from_directory('../build', filename)
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
