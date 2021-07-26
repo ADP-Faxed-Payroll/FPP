@@ -30,7 +30,6 @@ def upload_form():
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
-
 	if request.method == 'POST':
         # check if the post request has the file part
 		if 'file' not in request.files:
@@ -73,7 +72,7 @@ def upload_file():
 
 			word_confidence = get_confidence_levels(doc);
 			
-			matrix = get_vertices(doc)
+			matrix, color_matrix = get_vertices(doc)
 			footers = get_footers(doc)
 			
 			print('File successfully uploaded')
@@ -84,6 +83,7 @@ def upload_file():
 				'DocText': doc_text,
 				'Matrix': matrix,
 				'Footers': footers,
+				'Colors': color_matrix,
 			}
 			
 			return jsonify(data)
@@ -94,7 +94,6 @@ def upload_file():
 
 @app.route('/updateDictionary', methods=['POST'])
 def update_dict():
-	
 	if request.method == 'POST':
 		bad = request.json['newChar']
 		goodNum = request.json['numVal']

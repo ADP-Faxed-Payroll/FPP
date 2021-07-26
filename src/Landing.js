@@ -97,12 +97,31 @@ export default function Landing() {
       </div>
       <footer class="footer-text">
         <p>Made By: Kyle Partyka, AJ Ong, Giovanni DeRosa</p>
-        <a href="https://github.com/kwp5/">
+        <a href="https://github.com/kwp5">
           <img
-            src="https://www.clipartmax.com/png/middle/48-483031_github-logo-black-and-white-github-icon-vector.png"
-            width="75"
-            height="75"
-            alt="Github logo"
+          src="https://www.clipartmax.com/png/middle/48-483031_github-logo-black-and-white-github-icon-vector.png"
+          width="75"
+          height="75"
+          alt="Github logo"
+          title="Kyle's GitHub"
+          ></img>
+        </a>
+        <a href="https://github.com/Aj-Ong">
+          <img
+          src="https://www.clipartmax.com/png/middle/48-483031_github-logo-black-and-white-github-icon-vector.png"
+          width="75"
+          height="75"
+          alt="Github logo"
+          title="AJ's GitHub"
+          ></img>
+        </a>
+        <a href="https://github.com/gioNJIT">
+          <img
+          src="https://www.clipartmax.com/png/middle/48-483031_github-logo-black-and-white-github-icon-vector.png"
+          width="75"
+          height="75"
+          alt="Github logo"
+          title="Giovanni's GitHub"
           ></img>
         </a>
       </footer>

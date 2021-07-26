@@ -12,6 +12,7 @@ export default function FileUploader() {
                             				DocText: '',
                             				Matrix: [],
                             				Footers: {},
+                            				ColorMatrix:[],
                                             }); // JSON state object
     const[htrDataRecieved, setHTRDataRecieved] = useState(false);
     const [RotateDoc, setRotateDoc] = useState(0);
@@ -71,6 +72,7 @@ export default function FileUploader() {
                             DocText: response.data.DocText,
                             Matrix: response.data.Matrix,
                             Footers: response.data.Footers,
+                            ColorMatrix: response.data.Colors,
                             });
                 loadDiv.remove();
                 setHTRDataRecieved(true);
@@ -141,12 +143,31 @@ export default function FileUploader() {
                 <div>
                     <footer class="footer-text location">
                         <p>Made By: Kyle Partyka, AJ Ong, Giovanni DeRosa</p>
-                        <a href="https://github.com/kwp5/">
+                        <a href="https://github.com/kwp5">
                             <img
                                 src="https://www.clipartmax.com/png/middle/48-483031_github-logo-black-and-white-github-icon-vector.png"
                                 width="75"
                                 height="75"
                                 alt="Github logo"
+                                title="Kyle's GitHub"
+                            ></img>
+                        </a>
+                        <a href="https://github.com/Aj-Ong">
+                            <img
+                                src="https://www.clipartmax.com/png/middle/48-483031_github-logo-black-and-white-github-icon-vector.png"
+                                width="75"
+                                height="75"
+                                alt="Github logo"
+                                title="AJ's GitHub"
+                            ></img>
+                        </a>
+                        <a href="https://github.com/gioNJIT">
+                            <img
+                                src="https://www.clipartmax.com/png/middle/48-483031_github-logo-black-and-white-github-icon-vector.png"
+                                width="75"
+                                height="75"
+                                alt="Github logo"
+                                title="Giovanni's GitHub"
                             ></img>
                         </a>
                     </footer>
@@ -183,174 +204,174 @@ export default function FileUploader() {
                             <span class="h"><strong>Standby Hours</strong></span>
                             <span class="h"><strong>Notes</strong></span>
 
-                            <span contenteditable='true'>{htrData.Matrix[0][0]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[0][1]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[0][2]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[0][3]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[0][4]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[0][5]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[0][6]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[0][7]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[0][8]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[0][9]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[0][10]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[0][11]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[0][0]}}>{htrData.Matrix[0][0]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[0][1]}}>{htrData.Matrix[0][1]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[0][2]}}>{htrData.Matrix[0][2]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[0][3]}}>{htrData.Matrix[0][3]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[0][4]}}>{htrData.Matrix[0][4]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[0][5]}}>{htrData.Matrix[0][5]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[0][6]}}>{htrData.Matrix[0][6]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[0][7]}}>{htrData.Matrix[0][7]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[0][8]}}>{htrData.Matrix[0][8]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[0][9]}}>{htrData.Matrix[0][9]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[0][10]}}>{htrData.Matrix[0][10]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[0][11]}}>{htrData.Matrix[0][11]}</span>
                             
                            
-                            <span contenteditable='true'>{htrData.Matrix[1][0]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[1][1]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[1][2]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[1][3]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[1][4]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[1][5]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[1][6]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[1][7]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[1][8]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[1][9]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[1][10]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[1][11]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[1][0]}}>{htrData.Matrix[1][0]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[1][1]}}>{htrData.Matrix[1][1]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[1][2]}}>{htrData.Matrix[1][2]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[1][3]}}>{htrData.Matrix[1][3]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[1][4]}}>{htrData.Matrix[1][4]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[1][5]}}>{htrData.Matrix[1][5]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[1][6]}}>{htrData.Matrix[1][6]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[1][7]}}>{htrData.Matrix[1][7]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[1][8]}}>{htrData.Matrix[1][8]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[1][9]}}>{htrData.Matrix[1][9]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[1][10]}}>{htrData.Matrix[1][10]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[1][11]}}>{htrData.Matrix[1][11]}</span>
                             
-                            <span contenteditable='true'>{htrData.Matrix[2][0]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[2][1]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[2][2]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[2][3]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[2][4]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[2][5]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[2][6]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[2][7]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[2][8]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[2][9]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[2][10]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[2][11]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[2][0]}}>{htrData.Matrix[2][0]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[2][1]}}>{htrData.Matrix[2][1]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[2][2]}}>{htrData.Matrix[2][2]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[2][3]}}>{htrData.Matrix[2][3]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[2][4]}}>{htrData.Matrix[2][4]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[2][5]}}>{htrData.Matrix[2][5]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[2][6]}}>{htrData.Matrix[2][6]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[2][7]}}>{htrData.Matrix[2][7]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[2][8]}}>{htrData.Matrix[2][8]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[2][9]}}>{htrData.Matrix[2][9]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[2][10]}}>{htrData.Matrix[2][10]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[2][11]}}>{htrData.Matrix[2][11]}</span>
                             
-                            <span contenteditable='true'>{htrData.Matrix[3][0]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[3][1]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[3][2]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[3][3]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[3][4]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[3][5]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[3][6]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[3][7]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[3][8]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[3][9]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[3][10]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[3][11]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[3][0]}}>{htrData.Matrix[3][0]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[3][0]}}>{htrData.Matrix[3][1]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[3][0]}}>{htrData.Matrix[3][2]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[3][0]}}>{htrData.Matrix[3][3]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[3][0]}}>{htrData.Matrix[3][4]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[3][0]}}>{htrData.Matrix[3][5]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[3][0]}}>{htrData.Matrix[3][6]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[3][0]}}>{htrData.Matrix[3][7]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[3][0]}}>{htrData.Matrix[3][8]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[3][0]}}>{htrData.Matrix[3][9]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[3][0]}}>{htrData.Matrix[3][10]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[3][0]}}>{htrData.Matrix[3][11]}</span>
                             
-                            <span contenteditable='true'>{htrData.Matrix[4][0]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[4][1]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[4][2]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[4][3]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[4][4]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[4][5]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[4][6]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[4][7]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[4][8]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[4][9]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[4][10]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[4][11]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[4][0]}}>{htrData.Matrix[4][0]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[4][1]}}>{htrData.Matrix[4][1]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[4][2]}}>{htrData.Matrix[4][2]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[4][3]}}>{htrData.Matrix[4][3]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[4][4]}}>{htrData.Matrix[4][4]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[4][5]}}>{htrData.Matrix[4][5]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[4][6]}}>{htrData.Matrix[4][6]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[4][7]}}>{htrData.Matrix[4][7]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[4][8]}}>{htrData.Matrix[4][8]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[4][9]}}>{htrData.Matrix[4][9]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[4][10]}}>{htrData.Matrix[4][10]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[4][1]}}>{htrData.Matrix[4][11]}</span>
                             
-                            <span contenteditable='true'>{htrData.Matrix[5][0]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[5][1]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[5][2]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[5][3]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[5][4]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[5][5]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[5][6]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[5][7]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[5][8]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[5][9]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[5][10]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[5][11]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[5][0]}}>{htrData.Matrix[5][0]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[5][1]}}>{htrData.Matrix[5][1]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[5][2]}}>{htrData.Matrix[5][2]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[5][3]}}>{htrData.Matrix[5][3]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[5][4]}}>{htrData.Matrix[5][4]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[5][5]}}>{htrData.Matrix[5][5]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[5][6]}}>{htrData.Matrix[5][6]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[5][7]}}>{htrData.Matrix[5][7]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[5][8]}}>{htrData.Matrix[5][8]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[5][9]}}>{htrData.Matrix[5][9]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[5][10]}}>{htrData.Matrix[5][10]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[5][11]}}>{htrData.Matrix[5][11]}</span>
                             
-                            <span contenteditable='true'>{htrData.Matrix[6][0]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[6][1]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[6][2]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[6][3]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[6][4]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[6][5]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[6][6]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[6][7]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[6][8]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[6][9]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[6][10]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[6][11]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[6][0]}}>{htrData.Matrix[6][0]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[6][1]}}>{htrData.Matrix[6][1]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[6][2]}}>{htrData.Matrix[6][2]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[6][3]}}>{htrData.Matrix[6][3]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[6][4]}}>{htrData.Matrix[6][4]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[6][5]}}>{htrData.Matrix[6][5]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[6][6]}}>{htrData.Matrix[6][6]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[6][7]}}>{htrData.Matrix[6][7]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[6][8]}}>{htrData.Matrix[6][8]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[6][9]}}>{htrData.Matrix[6][9]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[6][10]}}>{htrData.Matrix[6][10]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[6][1]}}>{htrData.Matrix[6][11]}</span>
                             
-                            <span contenteditable='true'>{htrData.Matrix[7][0]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[7][1]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[7][2]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[7][3]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[7][4]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[7][5]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[7][6]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[7][7]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[7][8]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[7][9]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[7][10]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[7][11]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[7][0]}}>{htrData.Matrix[7][0]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[7][1]}}>{htrData.Matrix[7][1]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[7][2]}}>{htrData.Matrix[7][2]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[7][3]}}>{htrData.Matrix[7][3]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[7][4]}}>{htrData.Matrix[7][4]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[7][5]}}>{htrData.Matrix[7][5]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[7][6]}}>{htrData.Matrix[7][6]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[7][7]}}>{htrData.Matrix[7][7]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[7][8]}}>{htrData.Matrix[7][8]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[7][9]}}>{htrData.Matrix[7][9]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[7][10]}}>{htrData.Matrix[7][10]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[7][11]}}>{htrData.Matrix[7][11]}</span>
                             
-                            <span contenteditable='true'>{htrData.Matrix[8][0]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[8][1]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[8][2]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[8][3]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[8][4]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[8][5]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[8][6]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[8][7]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[8][8]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[8][9]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[8][10]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[8][11]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[8][0]}}>{htrData.Matrix[8][0]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[8][1]}}>{htrData.Matrix[8][1]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[8][2]}}>{htrData.Matrix[8][2]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[8][3]}}>{htrData.Matrix[8][3]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[8][4]}}>{htrData.Matrix[8][4]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[8][5]}}>{htrData.Matrix[8][5]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[8][6]}}>{htrData.Matrix[8][6]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[8][7]}}>{htrData.Matrix[8][7]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[8][8]}}>{htrData.Matrix[8][8]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[8][9]}}>{htrData.Matrix[8][9]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[8][10]}}>{htrData.Matrix[8][10]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[8][11]}}>{htrData.Matrix[8][11]}</span>
                             
-                            <span contenteditable='true'>{htrData.Matrix[9][0]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[9][1]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[9][2]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[9][3]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[9][4]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[9][5]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[9][6]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[9][7]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[9][8]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[9][9]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[9][10]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[9][11]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[9][0]}}>{htrData.Matrix[9][0]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[9][1]}}>{htrData.Matrix[9][1]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[9][2]}}>{htrData.Matrix[9][2]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[9][3]}}>{htrData.Matrix[9][3]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[9][4]}}>{htrData.Matrix[9][4]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[9][5]}}>{htrData.Matrix[9][5]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[9][6]}}>{htrData.Matrix[9][6]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[9][7]}}>{htrData.Matrix[9][7]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[9][8]}}>{htrData.Matrix[9][8]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[9][9]}}>{htrData.Matrix[9][9]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[9][10]}}>{htrData.Matrix[9][10]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[9][11]}}>{htrData.Matrix[9][11]}</span>
                             
-                            <span contenteditable='true'>{htrData.Matrix[10][0]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[10][1]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[10][2]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[10][3]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[10][4]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[10][5]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[10][6]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[10][7]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[10][8]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[10][9]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[10][10]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[10][11]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[10][0]}}>{htrData.Matrix[10][0]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[10][1]}}>{htrData.Matrix[10][1]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[10][2]}}>{htrData.Matrix[10][2]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[10][3]}}>{htrData.Matrix[10][3]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[10][4]}}>{htrData.Matrix[10][4]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[10][5]}}>{htrData.Matrix[10][5]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[10][6]}}>{htrData.Matrix[10][6]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[10][7]}}>{htrData.Matrix[10][7]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[10][8]}}>{htrData.Matrix[10][8]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[10][9]}}>{htrData.Matrix[10][9]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[10][10]}}>{htrData.Matrix[10][10]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[10][11]}}>{htrData.Matrix[10][11]}</span>
                             
-                            <span contenteditable='true'>{htrData.Matrix[11][0]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[11][1]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[11][2]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[11][3]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[11][4]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[11][5]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[11][6]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[11][7]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[11][8]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[11][9]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[11][10]}</span>
-                            <span contenteditable='true'>{htrData.Matrix[11][11]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[11][0]}}>{htrData.Matrix[11][0]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[11][1]}}>{htrData.Matrix[11][1]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[11][2]}}>{htrData.Matrix[11][2]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[11][3]}}>{htrData.Matrix[11][3]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[11][4]}}>{htrData.Matrix[11][4]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[11][5]}}>{htrData.Matrix[11][5]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[11][6]}}>{htrData.Matrix[11][6]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[11][7]}}>{htrData.Matrix[11][7]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[11][8]}}>{htrData.Matrix[11][8]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[11][9]}}>{htrData.Matrix[11][9]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[11][10]}}>{htrData.Matrix[11][10]}</span>
+                            <span contenteditable='true' style={{color : htrData.ColorMatrix[11][11]}}>{htrData.Matrix[11][11]}</span>
                             
                             
                             <span class="h"><strong>Company</strong></span> 
-                            <span contenteditable='true' class="two">{htrData.Footers['company']}</span>
+                            <span contenteditable='true' class="two" style={{color : htrData.Footers['colors'][1]}}>{htrData.Footers['company']}</span>
                             <span class="h"></span>
                             <span class="h"></span>
                             <span class="h"></span>
                             <span class="dp"><strong>Date Printed</strong></span> 
-                            <span contenteditable='true' class="date-printed">{htrData.Footers['date_printed']}</span>
+                            <span contenteditable='true' class="date-printed" style={{color : htrData.Footers['colors'][0]}}>{htrData.Footers['date_printed']}</span>
                             
                             <span class="h"><strong>Frequency</strong></span> 
-                            <span contenteditable='true' class="two">{htrData.Footers['frequency']}</span>
+                            <span contenteditable='true' class="two" style={{color : htrData.Footers['colors'][2]}}>{htrData.Footers['frequency']}</span>
                             <span class="h"></span>
                             <span class="h"></span>
                             <span class="h"></span>
@@ -360,7 +381,7 @@ export default function FileUploader() {
                             <span class="h"></span>
                             
                             <span class="h"><strong>Check Date</strong></span> 
-                            <span contenteditable='true' class="two">{htrData.Footers['check_date']}</span>
+                            <span contenteditable='true' class="two" style={{color : htrData.Footers['colors'][3]}}>{htrData.Footers['check_date']}</span>
                             <span class="h"></span>
                             <span class="h"></span>
                             <span class="h"></span>
@@ -370,7 +391,7 @@ export default function FileUploader() {
                             <span class="h"></span>
                             
                             <span class="h"><strong>Pay Period</strong></span> 
-                            <span contenteditable='true' class="two">{htrData.Footers['pay_period']}</span>
+                            <span contenteditable='true' class="two" style={{color : htrData.Footers['colors'][4]}}>{htrData.Footers['pay_period']}</span>
                             <span class="h"></span>
                             <span class="h"></span>
                             <span class="h"></span>
@@ -430,12 +451,31 @@ export default function FileUploader() {
                     <div>
                         <footer class="footer-text olocation">
                             <p>Made By: Kyle Partyka, AJ Ong, Giovanni DeRosa</p>
-                            <a href="https://github.com/kwp5/">
+                            <a href="https://github.com/kwp5">
                                 <img
                                     src="https://www.clipartmax.com/png/middle/48-483031_github-logo-black-and-white-github-icon-vector.png"
                                     width="75"
                                     height="75"
                                     alt="Github logo"
+                                    title="Kyle's GitHub"
+                                ></img>
+                            </a>
+                            <a href="https://github.com/Aj-Ong">
+                                <img
+                                    src="https://www.clipartmax.com/png/middle/48-483031_github-logo-black-and-white-github-icon-vector.png"
+                                    width="75"
+                                    height="75"
+                                    alt="Github logo"
+                                    title="AJ's GitHub"
+                                ></img>
+                            </a>
+                            <a href="https://github.com/gioNJIT">
+                                <img
+                                    src="https://www.clipartmax.com/png/middle/48-483031_github-logo-black-and-white-github-icon-vector.png"
+                                    width="75"
+                                    height="75"
+                                    alt="Github logo"
+                                    title="Giovanni's GitHub"
                                 ></img>
                             </a>
                         </footer>
@@ -445,14 +485,3 @@ export default function FileUploader() {
           );
     }
 }
-/*                <div>
-                List of words along with Confidence levels
-                {htrData.WordList.map((word, index) => ( // Maybe pass word and word Confidence to a Word Component
-                    <body>{word + ': ' +  100*Math.floor(htrData.WordConfidence[index] * 100) / 100 + '%'}</body>
-                    ))};
-                <p> ---------------------------------------------</p>
-                {htrData.SymbolList.map((letter, index) => ( // Maybe pass symbol and symbol Confidence to a Symbol Component
-                   <body>{letter + ': ' +  100*Math.floor(htrData.SymbolConfidence[index] * 100) / 100 + '%'}</body>
-                   ))};
-                </div>
-                */
