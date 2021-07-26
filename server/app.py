@@ -2,7 +2,7 @@ import os
 import urllib.request
 from flask import Flask, request, redirect, render_template, jsonify
 from werkzeug.utils import secure_filename
-from htr_generator import generate_htr_file, get_confidence_levels, get_vertices
+from htr_generator import generate_htr_file, get_confidence_levels, get_vertices, get_footers
 
 app = Flask(__name__)
 
@@ -70,20 +70,22 @@ def upload_file():
 				word_list.append(nextWord)
 				nextWord = ""
 
-			word_confidence, symbol_confidence = get_confidence_levels(doc);
+
+			word_confidence = get_confidence_levels(doc);
 			
-			get_vertices(doc)
+			matrix = get_vertices(doc)
+			footers = get_footers(doc)
 			
 			print('File successfully uploaded')
 
 			data = {
 				'WordList': word_list,
-				'SymbolList': symbol_list,
 				'WordConfidence': word_confidence,
-				'SymbolConfidence': symbol_confidence,
 				'DocText': doc_text,
+				'Matrix': matrix,
+				'Footers': footers,
 			}
-
+			
 			return jsonify(data)
 			
 		else:
